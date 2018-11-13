@@ -1,0 +1,8 @@
+Javascript can run outside the context of the browser. Example server. Through nodejs. 
+
+
+Any Javascript should be put inside script tag in html.
+
+document object -> browser.
+document.getElemetsByTagName("a") -> get links.
+REPL -> read evaluate print loop.

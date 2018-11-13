@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>
+            Guess Game
+        </title>
+    </head>
+    <body>
+        <script>
+        var name = prompt("Enter your name");
+        name = name[0].toUpperCase() + name.slice(1)
+        console.log("Welcome to the guess game " + name);
+        //camel case - javascript, java, c style
+        //menuItems
+        //userProfile
+        //orderDetails
+        
+        //Math.random() -> 0(included) - 1(excluded)
+       //var targetNumber = Math.round(Math.random() * 100 );
+        var targetNumber = Math.ceil(Math.random() * 100 );
+        var playerGuess = 0;
+        var maxGuess = 10;
+        var lowerBound = 1;
+        var upperBound = 100;
+        //console.log("target number - " + targetNumber);
+        for (var i = 0; i < maxGuess; i++){
+            var guessNumber = prompt("Guess my number between " + lowerBound + " and " + upperBound + ".");
+            console.log(guessNumber);
+            if(guessNumber < targetNumber){
+                console.log("Oops. Your guess was LOW.");
+                console.log("You have " + (maxGuess - i-1) + " guesses left.")
+                lowerBound = guessNumber;
+            }
+            else if(guessNumber > targetNumber){
+                console.log("Oops. Your guess was HIGH");
+                console.log("You have " + (maxGuess - i-1 ) + " guesses left.");
+                upperBound = guessNumber;
+            }
+            else if(guessNumber == targetNumber){
+                console.log("Good job, " + name + ". You guessed my number in " + (i+1) + " guesses.");
+                break;
+            }
+        }
+        if (i=maxGuess) {
+            console.log("Sorry. You didn't get my number. My number was " + targetNumber)
+        }
+        </script>
+    </body>
+</html>
