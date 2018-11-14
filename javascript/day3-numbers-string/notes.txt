@@ -1,0 +1,20 @@
+let cannot be redefined.
+const cannot be redefined.
+var can be redecalred.
+let can be reassigned.
+const cannot be reassigned.
+
+There is only one type of number type in javascipt.
+typeof returns a string such as number.
+datatype -> primitive type and object type.
+in python its object type always.
+primitive type -> it does not have any property or methods associated to it.
+array is object type.
+it has property such as length and method such as push.
+
+temp = 23.3
+temp.round is not allowed.
+but allowed in ruby.
+
+Math object help us to deal with primitive type -> number
+Math.min or (max) you cannot pass an array. Returns NaN. should be passed as arguments. So use spread operator, [...]
