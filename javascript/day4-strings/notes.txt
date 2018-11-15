@@ -1,0 +1,17 @@
+string is array of characters.
+string is a primitive datatype in javascript
+There is lot of implementation of strings while building application. 
+In the run time Javascript converts it into string object. 
+ex: .length is a property.
+Explore the methods of string class. 
+    toLowerCase()
+    toUpperCase()
+    indexOf()
+    lastIndexOf(use above to check whether a word appears more than once)
+    charAt()
+    includes() -> returns boolean value.
+    repeat(number) -> repeats number of times Or mulitply strings
+
+
+since string is array of characters we can loop over them.
+Using debugger
