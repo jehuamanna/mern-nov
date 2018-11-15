@@ -8,4 +8,4 @@ console.log('4' + 2 + 6) //426
 console.log('1' + 5 + '2') //152
 
 //48
-console.log('4' + (2+6)) //
+console.log('4' + (2+6)) //48
