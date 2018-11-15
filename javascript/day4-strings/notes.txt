@@ -15,3 +15,4 @@ Explore the methods of string class.
 
 since string is array of characters we can loop over them.
 Using debugger
+new es6 feature 'for of' but if you do it manually via the index that is very fastest
