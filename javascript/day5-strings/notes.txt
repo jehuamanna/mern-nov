@@ -8,3 +8,5 @@ substring()
 
 
 split -> return type is an array
+
+function should return some value. if not then it is a bad practice.
