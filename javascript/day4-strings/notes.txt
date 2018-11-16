@@ -6,13 +6,14 @@ ex: .length is a property.
 Explore the methods of string class. 
     toLowerCase()
     toUpperCase()
-    indexOf()
+    indexOf() -> help us to find a word or character.
     lastIndexOf(use above to check whether a word appears more than once)
     charAt()
     includes() -> returns boolean value.
     repeat(number) -> repeats number of times Or mulitply strings
 
 
-since string is array of characters we can loop over them.
+since string is array of characters we can loop over them. access each character via index.
+charAt() -> substitute of indexing.
 Using debugger
 new es6 feature 'for of' but if you do it manually via the index that is very fastest

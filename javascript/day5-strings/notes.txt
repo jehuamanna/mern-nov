@@ -1,0 +1,10 @@
+extracting certain parts of string.
+slice(begin, end) -> from begin upto end index.
+Method overloading -> variable number of arguments.
+slice()
+substring()
+
+
+
+
+split -> return type is an array
