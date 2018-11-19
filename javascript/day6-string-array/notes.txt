@@ -7,3 +7,6 @@ Def: An Array is an ordered interger indexed collection of values.
 Array.isArray(player) Because typeof will not help much.
 
 Array and Objects play a huge role in writing application.
+
+You need to remember the return types of these array methods check for push, pop, splice
+push method can takes multiple arguments.
