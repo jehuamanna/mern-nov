@@ -1,0 +1,9 @@
+string concatenation is ugly so use es6 template literal.
+another reason why to use template is to perform calculations.
+
+
+Array
+Def: An Array is an ordered interger indexed collection of values.
+Array.isArray(player) Because typeof will not help much.
+
+Array and Objects play a huge role in writing application.
