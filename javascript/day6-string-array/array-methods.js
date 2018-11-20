@@ -57,7 +57,7 @@ console.log(`(${numbers.slice(0,3).join('')} ${numbers.slice(3,6).join('')}-${nu
 console.log(cities)
 
 // element is present in an array and at what index 
-// indesOf has 2 use caes 1) to know what is the index of an element  2) to know if element is present or not
+// indexOf has 2 use cases 1) to know what is the index of an element  2) to know if element is present or not
 console.log(cities.indexOf('mumbai')) // 3
 console.log(cities.indexOf('kochi')) // -1
 

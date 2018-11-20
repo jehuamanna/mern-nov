@@ -1,0 +1,4 @@
+For each method-> has 2 methods-> first is the element and second is the index (Optional)
+For of -> simpler way-> slowest 
+
+check swiggy bookmyshow redbus
