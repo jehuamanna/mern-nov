@@ -1,0 +1,5 @@
+Object is unordered string indexed collection of values.
+if the key doesnot exists then it returns undefined
+
+use string if you have space in property names, cant use . operator to access the property value.
+cannot have more than one property with same name
