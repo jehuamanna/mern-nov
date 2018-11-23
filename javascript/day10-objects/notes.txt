@@ -1,0 +1,15 @@
+we can use {} or new Object to create an object.
+type of object is an object in javascript
+
+fastest way of checking a property -> compared it with undefined
+
+you will not loop over an object generally but still you can loop over using for - in loop
+
+Whenever we are trying to access a propertyof an object via a variable, we should always use [] notation and not . operator
+
+
+do not use object name inside object while refering. Only use this operator.
+
+'this' outside an object is empty.
+
+we use method inside an object  to perform operation on properties in an object.
