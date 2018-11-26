@@ -25,6 +25,7 @@ console.log(city.lastIndexOf('a')) // 4
 
 console.log(city.indexOf('g')) // 3
 console.log(city.lastIndexOf('g')) // 3
+//above combination can be used to find whether a something occurs only once.
 
 console.log(city.charAt(0)) // b
 console.log(city.includes('g')) // true
