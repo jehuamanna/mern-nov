@@ -1,0 +1,5 @@
+data can be classified into truthy and falsey value
+false, undefined, null, 0, NaN.
+Apart from above everything of real value is considered truthy -> 
+Empty array and empty object is truthy 
+
