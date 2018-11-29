@@ -37,4 +37,3 @@ const person = {
     }
 }
 console.log(person.getSkills())
-console.log('\r')
