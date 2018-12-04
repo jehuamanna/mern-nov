@@ -1,2 +1,3 @@
-/home/jehu/mern-nov/javascript/day14-axios/secret/gender-select.js
-
+*.keys
+node_modules/
+client_secret.json

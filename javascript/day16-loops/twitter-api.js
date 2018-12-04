@@ -6,7 +6,6 @@ var client = new Twitter({
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
   })
   
-  console.log(process.env.TWITTER_ACCESS_TOKEN_SECRET)
   client.post('statuses/update', {status: 'My twitter bot, #dctacademy'},  function(error, tweet, response) {
     if(error) throw error
     console.log(tweet)  // Tweet body.
