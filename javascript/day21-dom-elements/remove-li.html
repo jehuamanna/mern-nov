@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>remove items</title>
+    </head>
+    <body>
+        <script>
+            const menuItems = [
+                { id: 1, title: 'dosa', isVeg: true },
+                { id: 2, title: 'coffee', isVeg: true },
+                { id: 3, title: 'butter chicken', isVeg: false },
+                { id: 4, title: 'chicken biryani', isVeg: false },
+                { id: 5, title: 'paneer biryani', isVeg: true }
+            ]
+            const ul = document.createElement('ul')
+            menuItems.forEach(function(menu){
+                const li = document.createElement('li')
+                li.textContent = menu.title
+                ul.appendChild(li)
+                const btn = document.createElement('button')
+                btn.textContent = 'Remove'
+                li.appendChild(btn)
+                btn.onclick = function(){
+                    li.remove()
+                }
+            })
+            document.body.appendChild(ul)
+
+            
+
+        </script>
+    </body>
+</html>

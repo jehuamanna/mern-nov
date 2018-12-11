@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Auto Complete
+    </title>
+</head>
+
+<body>
+
+    <script>
+        const input = document.createElement('input')
+        input.id = 'input_id'
+        input.placeholder = 'search...'
+        input.type = 'text'
+
+        document.body.appendChild(input)
+        
+        const menuItems = [
+            { id: 1, title: 'dosa', isVeg: true },
+            { id: 2, title: 'coffee', isVeg: true },
+            { id: 3, title: 'butter chicken', isVeg: false },
+            { id: 4, title: 'chicken biryani', isVeg: false },
+            { id: 5, title: 'paneer biryani', isVeg: true }
+        ]
+        
+        const ulTag = document.createElement('ul')
+        menuItems.forEach(function(item){
+            const liTag = document.createElement('li')
+            liTag.textContent = item.title
+            ulTag.appendChild(liTag)
+        })
+        document.body.appendChild(ulTag)
+
+        input.addEventListener('keyup', function(){
+            ulTag.innerHTML = ''
+            const text = input.value
+            menuItems.forEach(function(item){
+                if(item.title.includes(text)){
+                    const li = document.createElement('li')
+                    li.textContent = item.title
+                    ulTag.appendChild(li)
+                }
+            })
+        })
+
+    </script>
+
+
+
+</body>
+
+</html>
