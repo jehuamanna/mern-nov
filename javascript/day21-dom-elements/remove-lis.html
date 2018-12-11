@@ -17,22 +17,62 @@
 
             menuItems.forEach(function(item){
                 const div = document.createElement('div')
+                div.name = 'div_name'
                 const input = document.createElement('input')
                 input.type = 'checkbox'
-                input.style = 'display: inline'
+                input.name = 'myCheckBox'
+
                 const li = document.createElement('li')
                 li.style = 'display: inline'
                 li.textContent = item.title
+                
                 div.appendChild(input)
                 div.appendChild(li)
                 ulTag.appendChild(div)
             })
             
+            const input = document.createElement('input')
+            input.type = 'checkbox'
+            input.onclick = checkUncheck
+            input.id = 'check_id'
+
+            document.body.appendChild(input)
+
+
             document.body.appendChild(ulTag)
             const btn = document.createElement('button')
             btn.textContent = 'Remove'
+            btn.onclick = myfunction
             document.body.appendChild(btn)
+            
+            function myfunction(){                
+                let checkboxes = document.getElementsByName('myCheckBox')
+                let selected = []
+                for(let i = 0; i < checkboxes.length; i++){
+                    if(checkboxes[i].checked == true){
+                        selected.push(checkboxes[i])
+                    }
+                }
+                for(let i = 0; i < selected.length; i++){
+                    selected[i].parentElement.remove()
+                }
+            }
+            function checkUncheck(){
+                const checkMe = document.getElementById('check_id')
+                if(checkMe.checked == true){
+                    let checkboxes = document.getElementsByName('myCheckBox');
+                    for (var i=0; i<checkboxes.length; i++) {
+                        checkboxes[i].checked = true
+                    }
+                }
+                else{
+                    let checkboxes = document.getElementsByName('myCheckBox');
+                    for (var i=0; i<checkboxes.length; i++) {
+                        checkboxes[i].checked = false
+                    }
 
+                }
+            }
             
 
         </script>
