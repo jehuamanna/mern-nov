@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Generate Random Number</title>
+    </head>
+    <body>
+        <h2 id="heading">Your number goes here</h2>
+        <button id="btn">Generate</button>
+        <script>
+            const btnHandle = document.getElementById('btn')
+            const headingHandle = document.getElementById('heading')
+            // event Handler  Event Listeners
+            btnHandle.addEventListener('click', function(){
+                let randomNumber = Math.round(Math.random() * 100)
+                headingHandle.textContent = randomNumber
+            })
+        </script>
+    </body>
+</html>

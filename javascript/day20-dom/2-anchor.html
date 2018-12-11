@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>anchor tag</title>
+    </head>
+    <body>
+        <!--
+            <a> </a> = tag / element
+            href = attribute
+            http://www.google.com = attribute's value
+            visit google - text
+        -->
+
+        <!--<a hreg = './1-hello-world.html'> Hellow world script</a>
+            <a href = 'http://www.google.com'>visit google</a> 
+
+        -->
+        <script>
+            const tag = document.createElement('a')
+            tag.setAttribute('href', 'http://www.google.com')
+            // const text = document.createTextNode('visit google')
+            // tag.appendChild(text)
+            tag.textContent = "visit google"
+            document.body.appendChild(tag)
+        </script>
+    </body>
+</html>

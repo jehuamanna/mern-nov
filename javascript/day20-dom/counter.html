@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>anchor tag</title>
+    </head>
+    <body>
+        <h2 id="counter">0</h2>
+        <button id="btnUp">Up</button>
+        <button id="btnDown">Down</button>
+        <button id="reset">Reset</button>
+        <button id="setYourOwn">Set your own</button>
+        <script>
+            const btnUpHandle = document.getElementById('btnUp')
+            const btnDownHandle = document.getElementById('btnDown')
+            const counterHandle = document.getElementById('counter')
+            const resetHandle = document.getElementById('reset')
+            const setYourOwnHandle = document.getElementById('setYourOwn')
+            // event Handler  Event Listeners
+            let counter = 0
+            btnUpHandle.addEventListener('click', function(){
+                counter++
+                counterHandle.textContent = counter
+            })
+            btnDownHandle.addEventListener('click', function(){
+                counter--
+                if(counter <0)
+                    counter =0
+                counterHandle.textContent = counter
+            })
+            resetHandle.addEventListener('click', function(){
+                if(counter !=0 ){
+                    let confirmValue = confirm("Do you want to reset?")
+                    if(confirmValue){ counter = 0}
+                }
+                
+                counterHandle.textContent = counter
+            })
+            setYourOwnHandle.addEventLister('click', function(){
+                let ownValue = prompt("Enter a number")
+                count = ownValue
+                counterHandle.textContent = counter
+            })
+
+
+        </script>
+    </body>
+</html>

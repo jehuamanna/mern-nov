@@ -1,13 +1,13 @@
 // iife - immediately invoked function expression
 
-// function sayHello(name){
-//     return 'Hello ' + name
-// }
+function sayHello(name){
+    return 'Hello ' + name
+}
 
-// console.log(sayHello('urvi'))
-(function(name){
+console.log(sayHello('urvi'))
+;(function(name){
     console.log('Hello i am iife ' + name)
-}('sunil'))
+})('sunil')
 
 //return value
 let result = (function(name){

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>listing file</title>
+    </head>
+    <body>
+        <script>
+            //node type = 1 - html element
+            // node element
+            const ulTag = document.createElement('ul')
+
+            const li1 = document.createElement('li')
+            li1.textContent = 'Lal Baugh'
+
+            // const li2 = document.createTextNode('Cubbon Park')
+            const li2 = document.createElement('li')
+            li2.textContent = 'Cubbon Park'
+
+            const li3 = document.createElement('li')
+            li3.textContent = 'MG Road'
+
+            ulTag.appendChild(li1)
+            ulTag.appendChild(li2)
+            ulTag.appendChild(li3)
+            document.body.appendChild(ulTag)
+        </script>
+    </body>
+</html>

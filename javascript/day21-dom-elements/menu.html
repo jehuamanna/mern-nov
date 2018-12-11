@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Menu List</title>
+    </head>
+    <body>
+        <script>
+            const menuItems = [
+                {id: 1, name: 'dosa', isVeg: true},
+                {id: 2, name: 'panner masala', isVeg:true},
+                {id: 3, name: 'chicken byriani', isVeg:false},
+                {id: 4, name: 'butter chicken', isVeg: false},
+                {id: 5, name: 'coffee', isVeg: true}
+            ]
+
+            const h2 = document.createElement('h2')
+            h2.textContent = `Listing menus - ${menuItems.length}`
+            document.body.appendChild(h2)
+            
+            const ul = document.createElement('ul')
+            menuItems.forEach(function(menu){
+                const li = document.createElement('li')
+                li.textContent = `${menu.name} - ${menu.isVeg ? 'veg': 'nonveg'}`
+                ul.appendChild(li)
+            })
+            document.body.appendChild(ul)
+        </script>
+    </body>
+</html>

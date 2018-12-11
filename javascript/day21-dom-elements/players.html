@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>template file</title>
+    </head>
+    <body>
+        <script>
+            const players = ['virat', 'sachin', 'rahul', 'dhoni', 'zaheer', 'raina', 'rishab', 'ashwin']
+            const h2 = document.createElement('h2')
+            h2.textContent = `Listing Player - ${players.length}`
+            document.body.appendChild(h2)
+
+            const ul = document.createElement('ul')
+            players.sort().forEach(function(player){
+                const li = document.createElement('li')
+                li.textContent = player.charAt(0).toUpperCase() + player.slice(1)
+                ul.appendChild(li)
+            })
+
+            document.body.appendChild(ul)
+        </script>
+    </body>
+</html>

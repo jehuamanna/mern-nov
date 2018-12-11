@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Menu List</title>
+    </head>
+    <body>
+        <input type="checkbox" id="myCheck" onclick="myFunction()">
+        <script>
+            const menuItems = [
+                {id: 1, name: 'dosa', isVeg: true},
+                {id: 2, name: 'panner masala', isVeg:true},
+                {id: 3, name: 'chicken byriani', isVeg:false},
+                {id: 4, name: 'butter chicken', isVeg: false},
+                {id: 5, name: 'coffee', isVeg: true}
+            ]
+
+            const vegArray = menuItems.filter(function(menu){
+                return menu.isVeg == true
+            })            
+            
+            const nonVegArray = menuItems.filter(function(menu){
+                return menu.isVeg == false
+            })
+            
+            h2NonVeg = document.createElement('h2')  
+            h2NonVeg.textContent = `All - ${menuItems.length}`
+            document.body.appendChild(h2NonVeg)
+            
+            ulNonVeg = document.createElement('ul')
+            menuItems.forEach(function(menu){
+                const li = document.createElement('li')
+                li.textContent = `${menu.name}`
+                ulNonVeg.appendChild(li)
+            })
+            document.body.appendChild(ulNonVeg)
+
+            // let ulNonVeg = undefined
+            // let ulVeg = undefined
+            // let h2Veg = undefined
+            // let h2NonVeg = undefined
+
+            function myFunction() {
+                // Get the checkbox
+                var checkBox = document.getElementById("myCheck");
+                // If the checkbox is checked, display the output text
+              
+                
+                if (checkBox.checked == true){
+                    if(ulNonVeg){
+                        ulNonVeg.remove()
+                        h2NonVeg.remove()
+
+                    }
+                    h2Veg = document.createElement('h2')  
+                    h2Veg.textContent = `Veg - ${vegArray.length}`
+                    document.body.appendChild(h2Veg)
+                    
+                    ulVeg = document.createElement('ul')
+                    vegArray.forEach(function(menu){
+                        const li = document.createElement('li')
+                        li.textContent = `${menu.name}`
+                        ulVeg.appendChild(li)
+                    })
+                    document.body.appendChild(ulVeg)                
+                } 
+                else {
+                    if(ulVeg){
+                        ulVeg.remove()
+                        h2Veg.remove()
+                    }
+
+                    h2NonVeg = document.createElement('h2')  
+                    h2NonVeg.textContent = `All - ${menuItems.length}`
+                    document.body.appendChild(h2NonVeg)
+                    
+                    ulNonVeg = document.createElement('ul')
+                    menuItems.forEach(function(menu){
+                        const li = document.createElement('li')
+                        li.textContent = `${menu.name}`
+                        ulNonVeg.appendChild(li)
+                    })
+                    document.body.appendChild(ulNonVeg)
+
+                }
+            }
+
+
+
+        </script>
+    </body>
+</html>
