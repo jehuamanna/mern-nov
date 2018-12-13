@@ -47,10 +47,9 @@
               
                 
                 if (checkBox.checked == true){
-                    if(ulNonVeg){
-                        ulNonVeg.remove()
-                        h2NonVeg.remove()
-                    }
+                
+                    ulNonVeg.remove()
+                    h2NonVeg.remove()
                     h2Veg = document.createElement('h2')  
                     h2Veg.textContent = `Veg - ${vegArray.length}`
                     document.body.appendChild(h2Veg)
@@ -64,10 +63,9 @@
                     document.body.appendChild(ulVeg)                
                 } 
                 else {
-                    if(ulVeg){
-                        ulVeg.remove()
-                        h2Veg.remove()
-                    }
+                    ulVeg.remove()
+                    h2Veg.remove()
+                    
 
                     h2NonVeg = document.createElement('h2')  
                     h2NonVeg.textContent = `All - ${menuItems.length}`
