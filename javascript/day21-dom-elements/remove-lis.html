@@ -35,10 +35,16 @@
             input.type = 'checkbox'
             input.onclick = checkUncheck
             input.id = 'check_id'
+            
 
             document.body.appendChild(input)
 
-
+            const div2 = document.createElement('div')
+            div2.textContent = "Check All"
+            div2.style = 'display: inline'
+            div2.id = 'div_id'
+            document.body.appendChild(div2)
+            
             document.body.appendChild(ulTag)
             const btn = document.createElement('button')
             btn.textContent = 'Remove'
@@ -49,23 +55,27 @@
                 let checkboxes = document.getElementsByName('myCheckBox')
                 let selected = []
                 for(let i = 0; i < checkboxes.length; i++){
-                    if(checkboxes[i].checked == true){
-                        selected.push(checkboxes[i])
+                    if(checkboxes[i].checked){
+                        checkboxes[i].parentElement.remove()
                     }
                 }
-                for(let i = 0; i < selected.length; i++){
-                    selected[i].parentElement.remove()
-                }
+                // for(let i = 0; i < selected.length; i++){
+                //     selected[i].parentElement.remove()
+                // }
             }
             function checkUncheck(){
                 const checkMe = document.getElementById('check_id')
                 if(checkMe.checked == true){
+                    let div = document.getElementById('div_id')
+                    div.textContent = 'Uncheck all'
                     let checkboxes = document.getElementsByName('myCheckBox');
                     for (var i=0; i<checkboxes.length; i++) {
                         checkboxes[i].checked = true
                     }
                 }
                 else{
+                    let div = document.getElementById('div_id')
+                    div.textContent = 'Check all'
                     let checkboxes = document.getElementsByName('myCheckBox');
                     for (var i=0; i<checkboxes.length; i++) {
                         checkboxes[i].checked = false

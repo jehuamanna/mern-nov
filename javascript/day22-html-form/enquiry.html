@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Enquiry form</title>
+    </head>
+    <body>
+        <form>
+            <label for="name"> Name</label>
+            <input type="text" id="name" name="name"/><br/>
+
+            <label for="email"> Email </label>
+            <input type="text" id="email" name="email"/><br/>
+
+            <label for="mobile"> Mobile</label>
+            <input type="text" id="mobile" name="mobile"/> <br/>
+
+            <label for="message"> Message </label>
+            <textarea id="message" name="message"></textarea> <br/>
+
+            <label> Gender </label>
+            <input type="radio" name="gender" id="male" value="male" /><label for="male">Male</label>
+            <input type="radio" name="gender" id="female" value="female" /><label for="female">Female</label></br>
+            <!--<label> DOB </label
+            <input type="date" name="dob" /> -->
+            <label for="course">Select Course</label>    
+            <select name="course" id="course">
+                <option value="">Select</option>
+                <option value="javascript">JavaScript</option>
+                <option value="react">React</option>
+                <option value="full-stack">Full Stack</option>
+                <option value="front-end">Front End</option>
+
+            </select> <br/>
+            <label >Get in touch</label>
+            <input type="checkbox" id="emailCB" name="contactEmail" /><label for="emailCB">Email</label>
+            <input type="checkbox" id="mobileCB" name="contactMobile" /><label for="mobileCB"> Mobile</label><br/>
+            <input type="submit" value="submit"/> or <input type="reset" value="reset"/>
+        </form>
+
+        <script>
+        </script>
+    </body>
+</html>

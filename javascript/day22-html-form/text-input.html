@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Text Input</title>
+    </head>
+    <body>
+        <form>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter Name"/><br/>
+
+        </form>
+        <script>
+            const nameHandle = document.getElementById('name')
+            nameHandle.addEventListener('focus', function(){
+                console.log('You are inside name input')
+            })
+            nameHandle.addEventListener('blur', function() {
+                console.log('You are outside the name input')
+                console.log('You have typed ', nameHandle.value )
+            })
+            nameHandle.addEventListener('keyup', function(){
+                console.log(nameHandle.value)
+            })
+            nameHandle.addEventListener('mouseover', function(){
+                console.log("You are inside")
+            })
+            nameHandle.addEventListener('mouseout', function(){
+                console.log("You are outside")
+            })
+        </script>
+    </body>
+</html>

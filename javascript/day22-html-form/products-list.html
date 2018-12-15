@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hello World</title>
+</head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<body>
+    <script>
+        let data = []
+        axios.get('http://dct-api-data.herokuapp.com/products.json').then(response => {
+            data = response.data
+
+            function Store() {
+            }
+
+            Store.data = data
+            Store.all = function (offset, limit) {
+                let last = offset + limit
+                if (arguments.length == 0)
+                    return Store.data
+                else {
+                    if (last > Store.data.length) {
+                        last = Store.data.length
+                    }
+                    return Store.data.slice(offset, last)
+                }
+            }
+
+            Store.findById = function (id) {
+                return Store.data.find(product => product.id == id)
+            }
+
+            const h1 = document.createElement('h1')
+            h1.textContent = "Listing Products"
+            document.body.appendChild(h1)
+            const table = document.createElement('table')
+            table.border = 1
+            const tr1 = document.createElement('tr')
+            const th1 = document.createElement('th')
+            th1.textContent = 'name'
+            tr1.appendChild(th1)
+            const th2 = document.createElement('th')
+            th2.textContent = 'id'
+            tr1.appendChild(th2)
+            const th3 = document.createElement('th')
+            th3.textContent = 'price'
+            tr1.appendChild(th3)
+            table.appendChild(tr1)
+
+
+            listingProducts(0, 15)
+
+
+            function listingProducts(offset, limit) {
+                btn = document.createElement('button')
+                btn.textContent = "Show more"
+                btn.onclick = function () {
+                    btn.remove()
+                    listingProducts(offset + limit, limit)
+                }
+
+                let array = Store.all(offset, limit)
+                for (let i = 0; i < array.length; i++) {
+                    const tr = document.createElement('tr')
+                    const td1 = document.createElement('td')
+                    td1.textContent = array[i].name
+                    tr.appendChild(td1)
+                    const td2 = document.createElement('td')
+                    td2.textContent = array[i].id
+                    tr.appendChild(td2)
+                    const td3 = document.createElement('td')
+                    td3.textContent = array[i].price
+                    tr.appendChild(td3)
+                    table.appendChild(tr)
+
+                }
+                document.body.appendChild(table)
+                document.body.appendChild(btn)
+            }
+
+
+
+
+        })
+    </script>
+</body>
+
+</html>

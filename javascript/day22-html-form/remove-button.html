@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hello World</title>
+</head>
+
+<body>
+    <script>
+        let btn
+        function calculate(offset, limit) {
+            btn = document.createElement('button')
+            btn.textContent = "Show more"
+            btn.onclick = function () {
+                btn.remove()
+                calculate(offset+limit, limit)
+            }
+
+            for(let i = offset; i<offset+limit;i++){
+                const div = document.createElement('div')
+                div.textContent = i+1
+                document.body.appendChild(div)
+            }
+            document.body.appendChild(btn)
+        }
+        calculate(0,10)
+    </script>
+</body>
+
+</html>
