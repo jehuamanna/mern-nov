@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Fetch users</title>
+    </head>
+    <body>
+        <button id="btn">Fetch Data</button>
+        <script>
+            const btnHandle = document.getElementById('btn')
+            btnHandle.addEventListener('click', function(){
+                const xhr = new XMLHttpRequest()
+
+                // xhr.oprn(httpMethod, url)
+                // httpMethods - GET, POST, PUT, DELETE
+                xhr.open('GET', 'https://jsonplaceholder.typicode.com/users')
+                xhr.send()
+
+                xhr.onload = function() {
+                    // data comes back to client as JSON - Javascript Object Notation
+                    // JSON is of type string
+                    console.log(typeof xhr.resposeText)
+                    // Convert JSON to JavaScript Object ??
+                    const users = JSON.parse(xhr.responseText)
+                    console.log(users)
+
+                    const ul = document.createElement('ul')
+
+                    users.forEach(function(user){
+                        const li = document.createElement('li')
+                        li.textContent = user.name
+                        ul.appendChild(li)
+                    })
+
+                    document.body.appendChild(ul)
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -11,10 +11,10 @@
         let data = []
         axios.get('http://dct-api-data.herokuapp.com/products.json').then(response => {
             data = response.data
-
+            let currentListing = 15
             function Store() {
             }
-
+            
             Store.data = data
             Store.all = function (offset, limit) {
                 let last = offset + limit
@@ -32,9 +32,17 @@
                 return Store.data.find(product => product.id == id)
             }
 
+            
+
             const h1 = document.createElement('h1')
             h1.textContent = "Listing Products"
             document.body.appendChild(h1)
+
+            const h2 = document.createElement('h2')
+            h2.id = 'h2_id'
+            h2.textContent = `listing products ${currentListing} out of ${Store.data.length}`
+            document.body.appendChild(h2)
+
             const table = document.createElement('table')
             table.border = 1
             const tr1 = document.createElement('tr')
@@ -58,11 +66,18 @@
                 btn.textContent = "Show more"
                 btn.onclick = function () {
                     btn.remove()
+                    currentListing = offset + limit
                     listingProducts(offset + limit, limit)
                 }
 
                 let array = Store.all(offset, limit)
                 for (let i = 0; i < array.length; i++) {
+                    if(offset+limit>Store.data.length)
+                        currentListing = Store.data.length
+                    else
+                        currentListing = offset + limit
+                    h2.textContent = `listing products ${currentListing} out of ${Store.data.length}`
+                    
                     const tr = document.createElement('tr')
                     const td1 = document.createElement('td')
                     td1.textContent = array[i].name

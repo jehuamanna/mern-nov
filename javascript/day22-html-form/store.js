@@ -1,4 +1,4 @@
-function Store(data) {
+function Store() {
 
 
 }

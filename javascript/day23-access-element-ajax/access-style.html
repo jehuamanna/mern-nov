@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Accessing Elements</title>
+    </head>
+    <body>
+        <h2 id="heading">Welcome to our website</h2>
+        <p>We offer interior design services</p>
+        <h2>Services Offered</h2>
+        <ul>
+            <li> Interior </li>
+            <li> Construction </li>
+            <li> Architecture </li>
+        </ul>
+        <p class="contact">Get in touch</p>
+        <p class="contact">Address: Jayanagar</p>
+
+        <script>
+            const headingHandle = document.getElementById('heading')
+            console.log(headingHandle)
+            
+            headingHandle.textContent = headingHandle.textContent.toUpperCase()
+            headingHandle.style.border = '2px solid red'
+
+            // use for loop for accessing elements
+
+            for ( let i = 0; i<contactElements.length;i++){
+                console.log(contactElements[i].style.border = '2px solid green')
+
+            }
+
+            const liElements = document.getElementsByTagName('li')
+            for( let i = 0; i< liElements.length; i++){
+                liElements[i].textContent = liElements[i].textContent.toUpperase()
+                liElements[i].sytle.color = 'blue'
+            }
+            const contact2 = document.querSelectorAll('.contact')
+            contact2.forEach(function(item){
+                 item.textContent = item.textContent.toLowerCase()
+             })
+
+        
+        </script>
+    </body>
+</html>

@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <title>
+        Product Filtering
+    </title>
+</head>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<body>
+    <script>
+        axios.get('http://dct-api-data.herokuapp.com/products.json').then(function (response) {
+            let data = response.data
+
+            let categories = []
+            data.forEach(function (item) {
+                if (!categories.includes(item.category)) {
+                    categories.push(item.category)
+                }
+            })
+            const divOuter = document.createElement('div')
+            divOuter.id = "outer_div_id"
+            selected = false
+
+            const checkBoxDiv = document.createElement('div')
+            checkBoxDiv.id = 'check_box_div_id'
+
+            categories.forEach(function (category) {
+                const input = document.createElement('input')
+                input.id = category
+                input.type = 'checkbox'
+
+                const tN = document.createTextNode(category)
+                checkBoxDiv.appendChild(input)
+                checkBoxDiv.appendChild(tN)
+            })
+
+            const input1 = document.createElement('input')
+            input1.type = 'text'
+            input1.id = 'price_id_1'
+            document.body.appendChild(input1)
+
+            const tN1 = document.createTextNode('to')
+            document.body.appendChild(tN1)
+
+            const input2 = document.createElement('input')
+            input2.type = 'text'
+            input2.id = 'price_id_2'
+            document.body.appendChild(input2)
+
+            document.body.appendChild(checkBoxDiv)
+            checkBoxDiv.addEventListener('click', function () {
+                selected = false
+                checkBoxDiv.childNodes.forEach(function (checkbox) {
+                    if (checkbox.checked) {
+                        selected = true
+                    }
+                })
+
+                if (selected) {
+                    divOuter.innerHTML = ''
+                    let checkedBoxes = []
+
+                    checkBoxDiv.childNodes.forEach(function (checkbox) {
+                        if (checkbox.checked) {
+                            checkedBoxes.push(checkbox)
+                        }
+                    })
+                    checkedBoxes.forEach(function (checkedBox) {
+                        data.forEach(function (item) {
+                            if (checkedBox.id == item.category) {
+                                value1 = input1.value
+                                value2 = input2.value
+                                if (item.price <= value1 && item.price >= value2) {
+                                    const div = document.createElement('div')
+                                    div.textContent = `${item.id} ${item.name} ${item.cod} ${item.category} ${item.stock}`
+                                    divOuter.appendChild(div)
+                                }
+                            }
+                        })
+                        document.body.appendChild(divOuter)
+
+                    })
+                }
+                else {
+                    data.forEach(function (item) {
+                        const div = document.createElement('div')
+                        div.textContent = `${item.id} ${item.name} ${item.cod} ${item.category} ${item.stock}`
+                        divOuter.appendChild(div)
+                    })
+                    document.body.appendChild(divOuter)
+
+                }
+
+
+
+
+            })
+
+            data.forEach(function (item) {
+                const div = document.createElement('div')
+                div.textContent = `${item.id} ${item.name} ${item.cod} ${item.category} ${item.stock}`
+                divOuter.appendChild(div)
+            })
+            document.body.appendChild(divOuter)
+        })
+
+    </script>
+</body>
+
+</html>

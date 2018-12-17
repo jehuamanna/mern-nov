@@ -1,37 +1,108 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>Category - Subcategory</title>
-    </head>
-    <body>
-        <script>
-            categories = [
-                { id: 1, name: 'Electronics'},
-                { id: 2, name: 'Clothing'},
-                { id: 3, name: 'Home'},
-                { id: 4, name: 'Food'},
-                { id: 5, name: 'Furnitures'},
 
-            ]
+<head>
+    <title>Category - Subcategory</title>
+</head>
 
-            subCategories = [
-                { id: 1, name: 'TV', cid:1},
-                { id: 2, name: 'Mobile', cid:1},
-                { id: 3, name: 'Laptop', cid:1},
-                { id: 4, name: 'Formal', cid:2},
-                { id: 5, name: 'Winter', cid:2},
-                { id: 6, name: 'Summer', cid:2},
-                { id: 7, name: 'Rainy', cid:2},
-                { id: 8, name: 'Kitchen', cid:3},
-                { id: 9, name: 'Dining', cid:3},
-                { id: 10, name: 'Outdoors', cid:3},
-                { id: 11, name: 'Chair', cid:4},
-                { id: 12, name: 'Table', cid:4},
-                { id: 13, name: 'Shelf', cid:4},
-            ]
+<body>
+    <script>
+        categories = [
+            { id: 1, name: 'Electronics' },
+            { id: 2, name: 'Clothing' },
+            { id: 3, name: 'Home' },
+            { id: 4, name: 'Food' },
+            { id: 5, name: 'Furnitures' },
 
-            const category = document.createElement('select')
-        </script>
-    </body>
+        ]
+
+        subCategories = [
+            { id: 1, name: 'TV', cid: 1 },
+            { id: 2, name: 'Mobile', cid: 1 },
+            { id: 3, name: 'Laptop', cid: 1 },
+            { id: 4, name: 'Formal', cid: 2 },
+            { id: 5, name: 'Winter', cid: 2 },
+            { id: 6, name: 'Summer', cid: 2 },
+            { id: 7, name: 'Rainy', cid: 2 },
+            { id: 8, name: 'Kitchen', cid: 3 },
+            { id: 9, name: 'Dining', cid: 3 },
+            { id: 10, name: 'Outdoors', cid: 3 },
+            { id: 11, name: 'Pizza', cid: 4 },
+            { id: 12, name: 'Chair', cid: 5 },
+            { id: 13, name: 'Table', cid: 5 },
+            { id: 14, name: 'Shelf', cid: 5 },
+        ]
+
+        const categoryCB = document.createElement('select')
+        categoryCB.id = 'category'
+        categoryCB.name = 'category'
+        const subCategoryCB = document.createElement('select')
+        subCategoryCB.id = 'subcategory'
+        subCategoryCB.name = 'subcategory'
+
+        const label1 = document.createElement('label')
+        label1.for = 'category'
+        label1.textContent = 'Category'
+        document.body.appendChild(label1)
+
+
+
+        const option = document.createElement('option')
+        option.value = -1
+        option.textContent = '-----SELECT------'
+        categoryCB.appendChild(option)
+
+
+        categories.forEach(function (category) {
+            const option = document.createElement('option')
+            option.value = category.id
+            option.textContent = category.name
+            categoryCB.appendChild(option)
+        })
+
+        document.body.appendChild(categoryCB)
+
+        document.body.appendChild(document.createElement('br'))
+
+        const label2 = document.createElement('label')
+        label2.for = 'subcategory'
+        label2.textContent = 'Sub Category'
+        document.body.appendChild(label2)
+
+        const option1 = document.createElement('option')
+        option1.value = -1
+        option1.textContent = '-----SELECT------'
+        subCategoryCB.appendChild(option1)
+
+
+
+
+        document.body.appendChild(subCategoryCB)
+        categoryCB.addEventListener('change', function () {
+            subCategoryCB.innerHTML = ''
+            const value = categoryCB[categoryCB.selectedIndex].value
+            if (value == -1) {
+                const option1 = document.createElement('option')
+                option1.value = -1
+                option1.textContent = '-----SELECT------'
+                subCategoryCB.appendChild(option1)
+
+            }
+
+            subCategories.forEach(function (subCat) {
+                if (subCat.cid == value) {
+                    const option = document.createElement('option')
+                    option.value = subCat.id
+                    option.textContent = subCat.name
+                    subCategoryCB.appendChild(option)
+                }
+            })
+            document.body.appendChild(subCategoryCB)
+        })
+
+
+    </script>
+</body>
+
 </html>

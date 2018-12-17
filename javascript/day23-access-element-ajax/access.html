@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Accessing Elements</title>
+    </head>
+    <body>
+        <h2 id="heading">Welcome to our website</h2>
+        <p>We offer interior design services</p>
+        <h2>Services Offered</h2>
+        <ul>
+            <li> Interior </li>
+            <li> Construction </li>
+            <li> Architecture </li>
+        </ul>
+        <p class="contact">Get in touch</p>
+        <p class="contact">Address: Jayanagar</p>
+
+        <script>
+            const headingHandle = document.getElementById('heading')
+            console.log(headingHandle)
+            // const headingHandleError = document.getElementById('header') // null
+
+            const contactElements = document.getElementsByClassName('contact')
+            console.log(contactElements) // HTMLCollections - non iterable - cannot use forEach
+            console.log(contactElements[0].textContent)
+
+            // contactElements.forEAch(function(ele) {
+                // console.log(ele.textContent)
+            //})
+
+            for(let i = 0; i< contactElements.length; i++){
+                console.log(constactElements[i].textContent)
+            }
+
+            //Array.from // converts into a primitive array
+             const liElements = document.getElementsByTagName('li')
+             console.log(liElements)
+
+             // querySelector()
+             // id = #
+             const heading1 = document.querySelector('#heading')
+             console.log(heading1)
+
+             // class = .
+             const contact1 = document.querySelector('.contact')
+        </script>
+    </body>
+</html>
