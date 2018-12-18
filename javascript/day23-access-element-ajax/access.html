@@ -24,7 +24,8 @@
             const contactElements = document.getElementsByClassName('contact')
             console.log(contactElements) // HTMLCollections - non iterable - cannot use forEach
             console.log(contactElements[0].textContent)
-
+            
+            //throws
             // contactElements.forEAch(function(ele) {
                 // console.log(ele.textContent)
             //})
@@ -44,6 +45,15 @@
 
              // class = .
              const contact1 = document.querySelector('.contact')
+             console.log(contact1) // returns the first match
+             const contact2 = document.querSelectorAll('.contact')
+             console.log(contact2) // NodeList -terable = use forEach
+
+             const li1 = document.querySelectorAll('li')
+             console.log(li1)
+             contact2.forEach(function(item){
+                 console.log(item)
+             })
         </script>
     </body>
 </html>

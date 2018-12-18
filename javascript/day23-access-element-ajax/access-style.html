@@ -31,11 +31,14 @@
             }
 
             const liElements = document.getElementsByTagName('li')
+
             for( let i = 0; i< liElements.length; i++){
                 liElements[i].textContent = liElements[i].textContent.toUpperase()
                 liElements[i].sytle.color = 'blue'
             }
+
             const contact2 = document.querSelectorAll('.contact')
+            
             contact2.forEach(function(item){
                  item.textContent = item.textContent.toLowerCase()
              })

@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "ravi",
+        "address": {
+            "city": "bangalore"
+        }
+    },
+    {
+        "id" : 2,
+        "name": "ramu",
+        "address": {
+            "city": "mysore"
+        }
+    },
+    {
+        "id": 3,
+        "name": "supriya"
+    }
+]

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Product listing with pagination</title>
+</head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<body>
+    <script>
+
+        axios.get('http://dct-api-data.herokuapp.com/products.json').then(response => {
+            let data = []
+            data = response.data
+
+            function Store() {
+            }
+
+            Store.data = data
+            Store.all = function (offset, limit) {
+                let last = offset + limit
+                if (arguments.length == 0)
+                    return Store.data
+                else {
+                    if (last > Store.data.length) {
+                        last = Store.data.length
+                    }
+                    return Store.data.slice(offset, last)
+                }
+            }
+            pageDetails = {}
+            pageDetails.offset = 0
+            pageDetails.limit = 15
+
+
+            createDiv()
+            createPageSize(pageDetails, Store)
+            createSearchBar(Store)
+            createTable(data, Store)
+            createPagination(pageDetails, Store)
+        })
+
+
+        function createPageSize(pageDetails, Store) {
+            const pageSize = [10, 25, 50, 100]
+            const select = document.createElement('select')
+            pageSize.forEach(function (item) {
+                const option = document.createElement('option')
+                option.value = item
+                option.textContent = item
+                select.appendChild(option)
+            })
+            select.addEventListener('change', function () {
+                pageDetails.limit = select.value
+                clearTable()
+                displayTable(pageDetails.offset, pageDetails.limit, Store)
+                createPagination(pageDetails, Store)
+            })
+
+            const divLeft = document.getElementById('left-div')
+            divLeft.appendChild(select)
+        }
+
+        function createDiv() {
+            console.log('hi')
+            const divLeft = document.createElement('div')
+            divLeft.id = 'left-div'
+            const divRight = document.createElement('div')
+            divRight.id = 'right-div'
+            divRight.style.display = 'inline'
+            document.body.appendChild(divLeft)
+            document.body.appendChild(divRight)
+        }
+
+        function createPagination(pageDetails, Store) {
+            let offset = pageDetails.offset
+            let limit = pageDetails.limit
+            let div = document.getElementById('pagination_id')
+            if (div) {
+                div.remove()
+            }
+            div = document.createElement('div')
+            div.id = 'pagination_id'
+            const div1 = document.createElement('div')
+            div1.style.display = 'inline'
+            const previous = document.createElement('button')
+            previous.textContent = "Previous"
+            const divLeft = document.getElementById('left-div')
+            div.appendChild(previous)
+
+            for (let i = 0; i < Store.data.length / limit; i++) {
+                const div2 = document.createElement('div')
+                div2.style.display = 'inline'
+                div2.textContent = i + 1
+                div2.addEventListener('click', function () {
+                    let pageNo = div2.textContent - 1
+                    offset = pageNo * limit
+                    clearTable()
+                    displayTable(offset, limit, Store)
+
+                })
+                div1.appendChild(div2)
+            }
+            div.appendChild(div1)
+
+            const next = document.createElement('button')
+            next.textContent = 'Next'
+            div.appendChild(next)
+            divLeft.appendChild(div)
+            previous.addEventListener('click', function () {
+                if (offset <= 0) {
+                    alert('do not go')
+                    return
+                }
+                clearTable()
+                console.log('previous ' + offset)
+                offset -= limit
+                displayTable(offset, limit, Store)
+
+            })
+
+            next.addEventListener('click', function () {
+                if (offset + limit >= Store.data.length) {
+                    alert("Do not go!")
+                    return 0
+
+                }
+                if (offset < 0) {
+                    offset = 0
+                }
+                clearTable()
+                console.log("next " + offset)
+                offset += limit
+                displayTable(offset, limit, Store)
+            })
+        }
+
+
+
+        function createSearchBar(Store) {
+            const input = document.createElement('input')
+            input.id = 'input_id'
+            input.placeholder = 'search...'
+            input.type = 'text'
+            const divLeft = document.getElementById('left-div')
+
+            input.addEventListener('keyup', function () {
+                clearTable()
+                text = input.value.toLowerCase()
+                const table = document.getElementById('table_id')
+
+                Store.data.forEach(function (item) {
+                    if (item.name.toLowerCase().includes(text)) {
+
+                        const tr = document.createElement('tr')
+                        tr.id = item.id
+                        tr.addEventListener('click', function () {
+                            let id = tr.id
+                            axios.get(`http://dct-api-data.herokuapp.com/products/${id}.json`).then(response => {
+                                let data = []
+                                data = response.data
+                                console.log(data)
+                                createProducts(data)
+                            })
+
+                            function createProducts(data) {
+                                const divRight = document.getElementById('right-div')
+                                divRight.innerHTML = ""
+                                string = `Name: ${data.name} Price: ${data.price} Category: ${data.category}`
+                                const div = document.createElement('div')
+                                const div1 = document.createElement('div')
+                                div1.textContent = string
+                                const div2 = document.createElement('div')
+                                const ul = document.createElement('ul')
+                                data.reviews.forEach(function (review) {
+                                    const li = document.createElement('li')
+                                    li.textContent = `UserName: ${review.user} Rating: ${review.rating} Review: ${review.body}`
+                                    ul.appendChild(li)
+                                })
+                                div2.appendChild(ul)
+                                div.appendChild(div1)
+                                div.appendChild(div2)
+                                divRight.appendChild(div)
+                            }
+
+
+                        })
+
+
+
+
+                        tr.className = "row"
+                        const td1 = document.createElement('td')
+                        td1.textContent = item.name
+                        tr.appendChild(td1)
+                        const td2 = document.createElement('td')
+                        td2.textContent = item.id
+                        tr.appendChild(td2)
+                        const td3 = document.createElement('td')
+                        td3.textContent = item.price
+                        tr.appendChild(td3)
+                        table.appendChild(tr)
+                    }
+                })
+
+            })
+
+            divLeft.appendChild(input)
+
+        }
+
+        function clearTable() {
+            const tableHandle = document.getElementById('table_id')
+            const rows = document.getElementsByClassName('row')
+            const len = rows.length
+            for (let i = 0; i < len; i++) {
+                rows[0].remove()
+            }
+        }
+
+        function createTable(data, Store) {
+            currentListing = 0
+            const h2 = document.createElement('h2')
+            h2.id = 'h2_id'
+            h2.textContent = `listing products ${currentListing} out of ${Store.data.length}`
+            const divLeft = document.getElementById('left-div')
+
+            divLeft.appendChild(h2)
+
+
+            const table = document.createElement('table')
+            table.border = 1
+            table.id = 'table_id'
+            const tr1 = document.createElement('tr')
+            const th1 = document.createElement('th')
+            th1.textContent = 'name'
+            tr1.appendChild(th1)
+            const th2 = document.createElement('th')
+            th2.textContent = 'id'
+            tr1.appendChild(th2)
+            const th3 = document.createElement('th')
+            th3.textContent = 'price'
+            tr1.appendChild(th3)
+            table.appendChild(tr1)
+            divLeft.appendChild(table)
+
+
+            let offset = 0
+            let limit = 15
+            displayTable(offset, limit, Store)
+            divLeft.appendChild(table)
+        }
+
+        function displayTable(offset, limit, Store) {
+            let currentListing = 0
+            let array = Store.all(offset, limit)
+            for (let i = 0; i < array.length; i++) {
+                if (offset + limit > Store.data.length)
+                    currentListing = Store.data.length
+                else
+                    currentListing = offset + limit
+                const h2 = document.getElementById('h2_id')
+                h2.textContent = `listing products ${currentListing} out of ${Store.data.length}`
+
+                const table = document.getElementById('table_id')
+
+                const tr = document.createElement('tr')
+                tr.id = array[i].id
+
+                tr.addEventListener('click', function () {
+                    let id = tr.id
+                    axios.get(`http://dct-api-data.herokuapp.com/products/${id}.json`).then(response => {
+                        let data = []
+                        data = response.data
+                        console.log(data)
+                        createProducts(data)
+                    })
+
+                    function createProducts(data) {
+                        const divRight = document.getElementById('right-div')
+                        divRight.innerHTML = ""
+                        string = `Name: ${data.name} Price: ${data.price} Category: ${data.category}`
+                        const div = document.createElement('div')
+                        const div1 = document.createElement('div')
+                        div1.textContent = string
+                        const div2 = document.createElement('div')
+                        const ul = document.createElement('ul')
+                        data.reviews.forEach(function (review) {
+                            const li = document.createElement('li')
+                            li.textContent = `UserName: ${review.user} Rating: ${review.rating} Review: ${review.body}`
+                            ul.appendChild(li)
+                        })
+                        div2.appendChild(ul)
+                        div.appendChild(div1)
+                        div.appendChild(div2)
+                        divRight.appendChild(div)
+                    }
+
+
+                })
+
+                tr.className = "row"
+                const td1 = document.createElement('td')
+                td1.textContent = array[i].name
+                tr.appendChild(td1)
+                const td2 = document.createElement('td')
+                td2.textContent = array[i].id
+                tr.appendChild(td2)
+                const td3 = document.createElement('td')
+                td3.textContent = array[i].price
+                tr.appendChild(td3)
+                table.appendChild(tr)
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
