@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Traversing Html</title>
+    </head>
+    <body>
+        <h1>Movie list</h1>
+        <h2>Kill Bill: Vol. 1</h2>
+        <p>
+            After awakening from a four-year coma, a former assasin wreaks vengence on the team of assassins who betrayed her.
+        </p>
+        <div>
+        <h3> Director </h3>
+            <ul><li>
+                Quentin Tarantino
+            </li></ul>
+        </div>
+        <div>
+        <h3> Actors </h3>
+            <ul id="actors">
+                <li> Uma Thurman</li>
+                <li> David </li>
+                <li> Daryl</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Genre</h3>
+            <ul>
+                <li>Action</li>
+                <li>Crime</li>
+                <li>Thriller</li>
+            </ul>
+        </div>
+        <script >
+            const html = document.documentElement
+            const body = html.children[1]
+            body.style.border = '2px solid green'  
+            const child1 = body.firstElementChild   
+            child1.style.border = '2px solid blue' 
+            child2 = child1.nextElementSibling
+            child2.style.border = '2px solid pink'
+            child3 = child2.nextElementSibling
+            child3.style.border = '2px solid red'
+            child4 = child3.nextElementSibling
+            child4.style.border = '2px solid green'
+            child5 = child4.nextElementSibling
+            child5.style.border = '2px solid red'
+            child7 = body.lastElementChild
+            child6 = child7.previousElementSibling
+            child6.style.border = '2px solid blue'
+
+            child41 = child4.firstElementChild
+            child41.style.border = '2px solid green'
+
+            child42 = child4.lastElementChild
+            child42.style.border = '2px solid blue'
+
+            child421 = child42.firstElementChild
+            child421.style.border = '2px solid red'
+
+            child51 = child5.firstElementChild
+            child51.style.border = '2px solid green'
+
+            child52 = child5.lastElementChild
+            child52.style.border = '2px solid blue'
+            for(let i = 0; i<child52.childElementCount; i++){
+                child52.children[i].style.border = '2px solid green'
+            }
+
+            for(let i  = 0; i<child6.childElementCount;i++){
+                child6.children[i].style.border = '2px solid red'
+            }
+            for(let i = 0; i<child6.children[1].childElementCount; i++){
+                child6.children[1].children[i].style.border = '2px solid pink'
+            }
+
+                 
+        </script>
+    </body>
+</html>

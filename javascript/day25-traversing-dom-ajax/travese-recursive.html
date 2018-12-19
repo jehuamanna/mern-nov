@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Traversing Html</title>
+</head>
+
+<body>
+    <h3> Actors </h3>
+    <ul>
+        <li> Uma Thurman</li>
+        <li> David </li>
+        <li> Daryl</li>
+    </ul>
+
+    <div>
+        <h3>Genre</h3>
+        <ul>
+            <li>Action</li>
+            <li>Crime</li>
+            <li>Thriller</li>
+        </ul>
+    </div>
+
+    </div>
+    <h1>Movie list</h1>
+    <h2>Kill Bill: Vol. 1</h2>
+    <p>
+        After awakening from a four-year coma, a former assasin wreaks vengence on the team of assassins who betrayed
+        her.
+    </p>
+    <div>
+        <h3> Director </h3>
+        <ul>
+            <li>
+                Quentin Tarantino
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h3> Actors </h3>
+        <ul id="actors">
+            <li> Uma Thurman</li>
+            <li> David </li>
+            <li> Daryl</li>
+        </ul>
+    </div>
+    <div>
+        <h3>Genre</h3>
+        <ul>
+            <li>Action</li>
+            <li>Crime</li>
+            <li>Thriller</li>
+        </ul>
+    </div>
+    <script>
+        const body = document.documentElement.children[1]
+        findRecursively(body)
+        function applyColor(element) {
+            element.style.border = `2px solid #${randomColor()}`
+        }
+
+        function randomColor() {
+            return Math.random().toString(16).substr(-6)
+        }
+
+        function findRecursively(element) {
+            applyColor(element)
+            //Check for child node
+            let firstChild = element.firstElementChild
+            if (firstChild) {
+                findRecursively(firstChild)
+            }
+            // check for next sibling
+            let nextSibling = element.nextElementSibling
+            if (nextSibling) {
+                findRecursively(nextSibling)
+            }
+            else {
+                return
+            }
+        }
+
+    </script>
+</body>
+
+</html>
