@@ -7,47 +7,111 @@
 </head>
 
 <body>
-    <h2>Start your Novel</h2>
-    <textarea rows="30" cols="80" id="textarea"></textarea>
-    <h3> Last Saved at <span id="date"></span></h3>
+    <div id="left" style="float:left; width:50%">
+        <h2>Start your Novel</h2>
+        <textarea rows="30" cols="40" id="textarea"></textarea>
+        <h3> Last Saved at <span id="date"></span></h3>
+    </div>
+    <div id="right" style="float:left; width:50%"></div>
     <script>
+        notPaused = true
         const textAreaHandle = document.getElementById('textarea')
-        // textAreaHandle.addEventListener('keyup', save)
+        textAreaHandle.addEventListener('keypress', function () {
+            notPaused = true
+        })
+
 
         function save() {
-            let lastSavedObject = JSON.parse(localStorage.getItem('lastsaved'))
+            let lastSavedObject
+            lastStoryArray = JSON.parse(localStorage.getItem('lastsaved'))
+            if (lastStoryArray) {
+                lastSavedObject = lastStoryArray[lastStoryArray.length - 1]
+            }
+            else {
+                lastSavedObject = null
+            }
             if (lastSavedObject) {
                 lastSaved = lastSavedObject.story
             }
-            else 
+            else
                 lastSaved = ""
             let currentStory = textAreaHandle.value
-            if (lastSaved != currentStory) {
+            if ((lastSaved != currentStory) && notPaused) {
                 const dateHandle = document.getElementById('date')
                 date = new Date()
                 time = date.toString().substr(16, 8)
                 dateHandle.textContent = time
 
-                currentStoryObject = {}
-                currentStoryObject['story'] = currentStory
-                currentStoryObject['time'] = time
+                currentStoryObject = createObject(currentStory, time)
+
                 lastSavedArray = JSON.parse(localStorage.getItem('lastsaved'))
-                lastSavedObject = {}
-                lastSavedObject['story'] = currentStory
-                lastSavedObject['time'] = time
-                localStorage.setItem('current', JSON.stringify(currentStoryObject))
-                localStorage.setItem('lastsaved', JSON.stringify(currentStoryObject))
+
+                lastSavedObject = createObject(currentStory, time)
+
+                if (lastStoryArray) {
+                    lastStoryArray.push(currentStoryObject)
+                }
+                else {
+                    lastStoryArray = []
+                    lastStoryArray.push(currentStoryObject)
+                }
+
+                localStorage.setItem('current', JSON.stringify(lastStoryArray))
+                localStorage.setItem('lastsaved', JSON.stringify(lastStoryArray))
+
+                if (lastStoryArray) {
+                    displayData()
+                }
 
 
             }
 
+
+        }
+
+        function displayData() {
+            {
+                const textAreaHandle = document.getElementById('textarea')
+
+                lastStoryArray = JSON.parse(localStorage.getItem('lastsaved'))
+
+                const divMain = document.getElementById('right')
+                divMain.innerHTML = ""
+                lastStoryArray.forEach(function (item) {
+                    const div = document.createElement('div')
+
+                    div.innerHTML = `<b>The text was </b>... ${item.story}... at time: <b>  ${item.time}</b>`
+                    divMain.appendChild(div)
+                    div.addEventListener('click', function () {
+                        notPaused = false
+                        textAreaHandle.value = item.story
+                    })
+                })
+            }
+        }
+
+        function createObject(currentStory, time) {
+            lastSavedObject = {}
+            lastSavedObject['story'] = currentStory
+            lastSavedObject['time'] = time
+            return lastSavedObject
         }
 
         if (localStorage.getItem('current')) {
-            textAreaHandle.value = JSON.parse(localStorage.getItem('current')).story
+            lastStoryArray = JSON.parse(localStorage.getItem('lastsaved'))
+            console.log(lastStoryArray)
+            if (lastStoryArray) {
+                lastSavedObject = lastStoryArray[lastStoryArray.length - 1]
+                textAreaHandle.value = lastSavedObject.story
+            }
+            else {
+                textAreaHandle.value = ''
+            }
         }
 
-        setInterval(save, 3000);
+        setInterval(save, 5000)
+        displayData()
+
     </script>
 </body>
 
