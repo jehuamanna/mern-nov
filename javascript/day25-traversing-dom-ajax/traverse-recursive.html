@@ -56,7 +56,8 @@
     </div>
     <script>
         const body = document.documentElement.children[1]
-        findRecursively(body)
+        // findRecursively(body)
+        findIteratively(body)
         function applyColor(element) {
             element.style.border = `2px solid #${randomColor()}`
         }
@@ -78,8 +79,13 @@
             if (nextSibling) {
                 findRecursively(nextSibling)
             }
-            else{
-                return
+        }
+        
+        function findIteratively(element){
+            applyColor(element)
+
+            for(let i = 0; i< element.childElementCount;i++){
+                findIteratively(element.children[i])
             }
         }
 

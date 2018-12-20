@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>GReeting Local Storage</title>
+</head>
+
+<body>
+    <h2> Hello, <span id="name">...</span></h2>
+    <button onclick="handleClick()">Enter name</button>
+    <button id="btn" onclick="clearStorage()">Clear Storage</button>
+    <script>
+        const nameHandle = document.getElementById('name')
+        let username;
+        function handleClick(){
+            username = prompt("Enter your name")
+            // write to local storage
+            localStorage.setItem('user', username)
+            nameHandle.innerText = localStorage.getItem('user')
+        }
+        // read from local storage
+        if(localStorage.getItem('name')){
+            nameHandle.innerText = localStorage.getItem('name')
+        }
+
+        function clearStorage(){
+            localStorage.removeItem('name')
+            nameHandle.innerText = '...'
+        }
+
+
+    </script>
+</body>
+
+</html>

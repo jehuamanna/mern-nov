@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Auto Save</title>
+</head>
+
+<body>
+    <h2>Start your Novel</h2>
+    <textarea rows="30" cols="80" id="textarea"></textarea>
+    <h3> Last Saved at <span id="date"></span></h3>
+    <script>
+        const textAreaHandle = document.getElementById('textarea')
+        // textAreaHandle.addEventListener('keyup', save)
+
+        function save() {
+            let lastSavedObject = JSON.parse(localStorage.getItem('lastsaved'))
+            if (lastSavedObject) {
+                lastSaved = lastSavedObject.story
+            }
+            else 
+                lastSaved = ""
+            let currentStory = textAreaHandle.value
+            if (lastSaved != currentStory) {
+                const dateHandle = document.getElementById('date')
+                date = new Date()
+                time = date.toString().substr(16, 8)
+                dateHandle.textContent = time
+
+                currentStoryObject = {}
+                currentStoryObject['story'] = currentStory
+                currentStoryObject['time'] = time
+                lastSavedArray = JSON.parse(localStorage.getItem('lastsaved'))
+                lastSavedObject = {}
+                lastSavedObject['story'] = currentStory
+                lastSavedObject['time'] = time
+                localStorage.setItem('current', JSON.stringify(currentStoryObject))
+                localStorage.setItem('lastsaved', JSON.stringify(currentStoryObject))
+
+
+            }
+
+        }
+
+        if (localStorage.getItem('current')) {
+            textAreaHandle.value = JSON.parse(localStorage.getItem('current')).story
+        }
+
+        setInterval(save, 3000);
+    </script>
+</body>
+
+</html>
