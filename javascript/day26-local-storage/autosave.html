@@ -7,14 +7,169 @@
 </head>
 
 <body>
+    <!--
     <div id="left" style="float:left; width:50%">
         <h2>Start your Novel</h2>
         <textarea rows="30" cols="40" id="textarea"></textarea>
         <h3> Last Saved at <span id="date"></span></h3>
     </div>
     <div id="right" style="float:left; width:50%"></div>
+
+-->
+
     <script>
+
+
+        function ListDiff(details) {
+            this.name = details.name
+            this.row = details.row
+            this.column = details.column
+            this.textAreaId = `textarea-${this.name}`
+            this.leftDivId = `left-${this.name}`
+            this.rightDivId = `right-${this.name}`
+            this.timeId = `time-${this.name}`
+            this.localStorageName = `local-storage-${this.name}`
+            this.notPaused = true
+
+
+
+            this.createUI = function () {
+                const divLeft = document.createElement('div')
+                divLeft.id = this.leftDivId
+                divLeft.style = "float:left; width:50%"
+                const divRight = document.createElement('div')
+                divRight.id = this.rightDivId
+                divRight.style = "float:right; width:50%"
+                const h2 = document.createElement('h2')
+                h2.textContent = 'Start your ' + this.name
+                divLeft.appendChild(h2)
+                const textArea = document.createElement('textarea')
+                textArea.rows = this.row
+                textArea.cols = this.column
+                textArea.id = this.textAreaId
+                divLeft.appendChild(textArea)
+                const h3 = document.createElement('h3')
+                h3.textContent = 'Last saved at'
+                const span = document.createElement('span')
+                span.id = this.timeId
+                h3.appendChild(span)
+                divLeft.appendChild(h3)
+                document.body.appendChild(divLeft)
+                document.body.appendChild(divRight)
+
+            }
+
+
+            this.captureData = function () {
+                let lastSavedObject
+                const textAreaHandle = document.getElementById(this.textAreaId)
+                let currentStory = textAreaHandle.value
+
+                lastStoryArray = JSON.parse(localStorage.getItem(this.localStorageName))
+                if (lastStoryArray) {
+                    lastSavedObject = lastStoryArray[lastStoryArray.length - 1]
+                }
+                else {
+                    lastSavedObject = null
+                }
+                if (lastSavedObject) {
+                    lastSaved = lastSavedObject.story
+                }
+                else
+                    lastSaved = ""
+
+                if ((lastSaved != currentStory) && this.notPaused) {
+                    this.updateStorage(currentStory)
+
+                    this.displayData()
+                }
+
+
+            }
+
+            this.updateStorage = function (currentStory) {
+                const dateHandle = document.getElementById(this.timeId)
+                date = new Date()
+                time = date.toString().substr(16, 8)
+                dateHandle.textContent = time
+
+                currentStoryObject = this.createObject(currentStory, time)
+
+                lastSavedArray = JSON.parse(localStorage.getItem(this.localStorageName))
+
+                lastSavedObject = this.createObject(currentStory, time)
+
+                if (lastStoryArray) {
+                    lastStoryArray.push(currentStoryObject)
+                }
+                else {
+                    lastStoryArray = []
+                    lastStoryArray.push(currentStoryObject)
+                }
+
+                localStorage.setItem(this.localStorageName, JSON.stringify(lastStoryArray))
+            }
+
+
+            this.displayData = function () {
+                const textAreaHandle = document.getElementById(this.textAreaId)
+
+                lastStoryArray = JSON.parse(localStorage.getItem(this.localStorageName))
+
+                const divMain = document.getElementById(this.rightDivId)
+                divMain.innerHTML = ""
+                lastStoryArray.forEach(function (item) {
+                    const div = document.createElement('div')
+
+                    div.innerHTML = `<b>The text was </b>... ${item.story} ...<br> <b> at time:</b> ${item.time}`
+                    divMain.appendChild(div)
+                    div.addEventListener('click', function () {
+                        this.notPaused = false
+                        textAreaHandle.value = item.story
+                    }.bind(this))
+                }.bind(this))
+            }
+
+            this.createObject = function (currentStory, time) {
+                lastSavedObject = {}
+                lastSavedObject['story'] = currentStory
+                lastSavedObject['time'] = time
+                return lastSavedObject
+            }
+
+            this.getLocalStorage = function () {
+                if (localStorage.getItem('current')) {
+                    lastStoryArray = JSON.parse(localStorage.getItem(this.localStorageName))
+                    if (lastStoryArray) {
+                        lastSavedObject = lastStoryArray[lastStoryArray.length - 1]
+                        textAreaHandle.value = lastSavedObject.story
+                    }
+                    else {
+                        textAreaHandle.value = ''
+                    }
+                }
+            }
+
+
+            this.createUI()
+
+            setInterval(this.captureData.bind(this), 3000)
+            const textAreaHandle = document.getElementById(this.textAreaId)
+            textAreaHandle.addEventListener('keypress', function () {
+                this.notPaused = true
+            }.bind(this))
+
+
+        }
+        novelDetails = { name: 'novel', row: 30, column: 40 }
+        let novel = new ListDiff(novelDetails)
+        novelDetails = { name: 'code', row: 30, column: 70 }
+        let code = new ListDiff(novelDetails)
+
+
+        /*
         notPaused = true
+
         const textAreaHandle = document.getElementById('textarea')
         textAreaHandle.addEventListener('keypress', function () {
             notPaused = true
@@ -23,7 +178,11 @@
 
         function save() {
             let lastSavedObject
+            let currentStory = textAreaHandle.value
+
             lastStoryArray = JSON.parse(localStorage.getItem('lastsaved'))
+
+
             if (lastStoryArray) {
                 lastSavedObject = lastStoryArray[lastStoryArray.length - 1]
             }
@@ -35,42 +194,40 @@
             }
             else
                 lastSaved = ""
-            let currentStory = textAreaHandle.value
+
             if ((lastSaved != currentStory) && notPaused) {
-                const dateHandle = document.getElementById('date')
-                date = new Date()
-                time = date.toString().substr(16, 8)
-                dateHandle.textContent = time
+                updateStorage(currentStory)
 
-                currentStoryObject = createObject(currentStory, time)
-
-                lastSavedArray = JSON.parse(localStorage.getItem('lastsaved'))
-
-                lastSavedObject = createObject(currentStory, time)
-
-                if (lastStoryArray) {
-                    lastStoryArray.push(currentStoryObject)
-                }
-                else {
-                    lastStoryArray = []
-                    lastStoryArray.push(currentStoryObject)
-                }
-
-                localStorage.setItem('current', JSON.stringify(lastStoryArray))
-                localStorage.setItem('lastsaved', JSON.stringify(lastStoryArray))
-
-                if (lastStoryArray) {
-                    displayData()
-                }
-
-
+                displayData()
             }
 
 
         }
 
+        function updateStorage(currentStory) {
+            const dateHandle = document.getElementById('date')
+            date = new Date()
+            time = date.toString().substr(16, 8)
+            dateHandle.textContent = time
+
+            currentStoryObject = createObject(currentStory, time)
+
+            lastSavedArray = JSON.parse(localStorage.getItem('lastsaved'))
+
+            lastSavedObject = createObject(currentStory, time)
+
+            if (lastStoryArray) {
+                lastStoryArray.push(currentStoryObject)
+            }
+            else {
+                lastStoryArray = []
+                lastStoryArray.push(currentStoryObject)
+            }
+
+            localStorage.setItem('lastsaved', JSON.stringify(lastStoryArray))
+        }
+
         function displayData() {
-            {
                 const textAreaHandle = document.getElementById('textarea')
 
                 lastStoryArray = JSON.parse(localStorage.getItem('lastsaved'))
@@ -80,14 +237,13 @@
                 lastStoryArray.forEach(function (item) {
                     const div = document.createElement('div')
 
-                    div.innerHTML = `<b>The text was </b>... ${item.story}... at time: <b>  ${item.time}</b>`
+                    div.innerHTML = `<b>The text was </b>... ${item.story} ...<br> <b> at time:</b> ${item.time}`
                     divMain.appendChild(div)
                     div.addEventListener('click', function () {
                         notPaused = false
                         textAreaHandle.value = item.story
                     })
                 })
-            }
         }
 
         function createObject(currentStory, time) {
@@ -111,7 +267,7 @@
 
         setInterval(save, 5000)
         displayData()
-
+*/
     </script>
 </body>
 
