@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Quotify</title>
+    <style>
+        #heading {
+            font-size: 4em;
+        }
+
+        .center-div {
+            width: 200px;
+            height: 100px;
+
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            margin: auto;
+        }
+
+        .anchor-tags {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            margin: auto;
+            width: 550px;
+        }
+
+        #btn {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 200px;
+            margin: auto;
+
+        }
+
+        .quote {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            width: 600px;
+            margin: auto;
+
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div id="heading" class="center-div">Quotify</div>
+    <div class="anchor-tags">
+
+        <a href="./index.html">Random Quote (API)</a> |
+        <a href="./saved-quotes.html">Random Quote (Local)</a> |
+        <a href="./new-quote.html">Add Quote</a> |
+        <a href="./list-all-saved-quotes.html">List All Quotes (Local)</a>
+    </div>
+    <div id="quote"></div>
+    <div id="btn">
+        <button onclick="getQuote()">Get another Quote</button>
+    </div>
+
+    <script>
+        function getQuote() {
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', `https://talaikis.com/api/quotes/random/`)
+            xhr.send()
+
+            xhr.onload = function () {
+                const data = JSON.parse(xhr.responseText)
+                const div = document.getElementById('quote')
+                div.textContent = `${data.quote} \n-${data.author}`
+            }
+        }
+        getQuote()
+    </script>
+</body>
+
+</html>

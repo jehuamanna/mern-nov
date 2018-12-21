@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>javascript XML</title>
+</head>
+<body>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/babel.js"></script>
+
+	<div id="root">
+		
+	</div>
+
+	<script type="text/babel">
+		const rootHandle = document.getElementById('root');
+        function Restaurant(props){
+            return (
+                <div>
+                    <h2> { props.name} </h2>
+                    <p>{props.type}</p>
+                    <p>{props.rating}</p>
+                    <hr/>
+                </div>
+
+            )
+        }
+
+        function App() {
+            return (
+                <div>
+                    <h2> Swizzy </h2>
+                    <Restaurant name="Hari Sandwich" type="Fast Food" rating="4.2"/>
+                    <Restaurant name="Cool Joint" type="Fast Food" rating="4.2"/>
+                    
+                </div>
+            )
+        }
+
+		ReactDOM.render(<App/>,rootHandle);
+	</script>
+
+</body>
+</html>

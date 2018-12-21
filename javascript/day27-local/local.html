@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Task List
+    </title>
+</head>
+<body>
+    <h1>My Task List</h1>
+    <ul id="list">
+
+    </ul>
+    
+    <h3>Add Task</h3>
+    <form id="taskForm">
+        <label> 
+            Title 
+            <input type="text" name="title" id="title" />
+        </label> <br/>
+
+        <label>
+            isCompleted
+            <input type="checkbox" name="isCompleted" id="status" />
+        </label> <br />
+
+        <input type="submit" value="Add Task" /> 
+    </form>
+
+    <script>
+        const taskFormHandle = document.getElementById('taskForm')
+        const titleHandle = document.getElementById('title')
+        const statusHandle = document.getElementById('status')
+        const listHandle = document.querySelector('#list')
+
+        // initial setup
+        let localDB = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
+
+        function liMaker(task){
+            let li = document.createElement('li')
+            let input = document.createElement('input')
+            //    let type = document.createAttribute('type')
+            //    type.value = 'input' 
+            //    input.setAttributeNode(type)
+
+            
+            // input.setAttribute('type', 'checkbox')
+            // input.text = 'checkbox'
+
+
+            // if(task.isCompleted) {
+            //     input.setAttribute('checked', 'checked')
+            // }
+            // li.appendChild(input)
+
+            // if(task.isCompleted) {
+            //     let s = document.createElement('s')
+            //     s.textContent = task.title 
+            //     li.appendChild(s)
+            // } else {
+            //     let text = document.createTextNode(task.title)
+            //     li.appendChild(text)
+            // }
+
+            // li.textContent = task.title
+            li.innerHTML = `<input type="checkbox" ${task.isCompleted ? 'checked' : ''}/> ${task.isCompleted ? `<s>${task.title}</s>` : task.title }`
+            listHandle.appendChild(li)
+        }
+
+        taskFormHandle.addEventListener('submit', function(event){
+            event.preventDefault()
+            // let task = titleHandle.value
+            // console.log(titleHandle.value, statusHandle.checked)
+            let task = {
+                title: titleHandle.value, 
+                isCompleted: statusHandle.checked
+            }
+
+            localDB.push(task)
+            localStorage.setItem('tasks', JSON.stringify(localDB))
+            liMaker(task)
+
+            // titleHandle.value = ''
+            taskFormHandle.reset()
+        })  
+
+        localDB.forEach(function(task){
+           liMaker(task)
+        })
+
+    </script>
+</body>
+
+</html>
