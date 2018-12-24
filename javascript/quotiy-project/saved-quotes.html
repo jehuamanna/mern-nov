@@ -50,7 +50,7 @@
             width: 600px;
             margin: auto;
 
-            
+
         }
     </style>
 </head>
@@ -65,22 +65,26 @@
         <a href="./list-all-saved-quotes.html">List All Quotes (Local)</a>
     </div>
     <div id="quote"></div>
+    
     <div id="btn">
         <button onclick="getQuote()">Get another Quote</button>
     </div>
 
     <script>
         function getQuote() {
-            const xhr = new XMLHttpRequest()
-            xhr.open('GET', `https://talaikis.com/api/quotes/random/`)
-            xhr.send()
-
-            xhr.onload = function () {
-                const data = JSON.parse(xhr.responseText)
+            let localDB = localStorage.getItem('quotes') ? JSON.parse(localStorage.getItem('quotes')) : []
+            if(localDB.length){
+                let index = (Math.round((Math.random() *100)) % localDB.length)
+                console.log(index)
+                let data = localDB[index-1]
                 const div = document.getElementById('quote')
-                div.textContent = `${data.quote} \n-${data.author}`
+                div.textContent = `${data.quote} \n\n-${data.author}`
             }
         }
+
+
+
+        let obj
         getQuote()
     </script>
 </body>

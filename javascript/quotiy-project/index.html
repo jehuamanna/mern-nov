@@ -50,7 +50,7 @@
             width: 600px;
             margin: auto;
 
-            
+
         }
     </style>
 </head>
@@ -74,31 +74,60 @@
     <script>
         function getQuote() {
             const xhr = new XMLHttpRequest()
-            xhr.open('GET', `https://talaikis.com/api/quotes/random/`)
+            xhr.open('GET', `https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json`)
             xhr.send()
 
             xhr.onload = function () {
                 const data = JSON.parse(xhr.responseText)
                 const div = document.getElementById('quote')
-                div.textContent = `${data.quote} \n-${data.author}`
-                saveLocally(data)
+                div.textContent = `${data.quoteText} \n-${data.quoteAuthor}`
+                obj = {
+                    quote: data.quoteText,
+                    author: data.quoteAuthor
+                }
+
+
+                let localDB = localStorage.getItem('quotes') ? JSON.parse(localStorage.getItem('quotes')) : []
+                localDB.forEach(function (quote) {
+                    if (quote.quote == obj.quote) {
+                        saved = true
+                    }
+
+                })
+                if (saved) {
+                    saved = false
+                    btn.textContent = 'Save to Local'
+                    btn.disabled = false
+                }
+
+
             }
+
         }
-        function saveLocally(data){
-            const btn = document.getElementById('save')
-            obj = {
-                quote: data.quote,
-                author: data.author
-            }
+        function clicked() {
+            console.log("clicked")
             let localDB = localStorage.getItem('quotes') ? JSON.parse(localStorage.getItem('quotes')) : []
-            localDB.push(obj)
-            localStorage.setItem('quotes', JSON.stringify(localDB))
-            btn.textContent = 'Sa'
+            localDB.forEach(function (quote) {
+                if (quote.quote == obj.quote) {
+                    saved = true
+                }
+
+            })
 
 
+            if (!saved) {
+                localDB.push(obj)
+                localStorage.setItem('quotes', JSON.stringify(localDB))
+                saved = true
+                btn.textContent = 'Saved'
+                btn.disabled = true
+            }
         }
 
-
+        let obj
+        let saved = false
+        const btn = document.getElementById('save')
+        btn.addEventListener('click', clicked)
         getQuote()
     </script>
 </body>

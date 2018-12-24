@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Quotify</title>
+    <style>
+        #heading {
+            font-size: 4em;
+        }
+
+        .center-div {
+            width: 200px;
+            height: 100px;
+
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            margin: auto;
+        }
+
+        .anchor-tags {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            margin: auto;
+            width: 550px;
+        }
+
+        #btn {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 200px;
+            margin: auto;
+
+        }
+
+        .centerme{
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 200px;
+            margin: auto;
+
+        }
+        .quote {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            width: 600px;
+            margin: auto;
+        }
+
+        .textarea {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="heading" class="center-div">Quotify</div>
+    <div class="anchor-tags">
+
+        <a href="./index.html">Random Quote (API)</a> |
+        <a href="./saved-quotes.html">Random Quote (Local)</a> |
+        <a href="./new-quote.html">Add Quote</a> |
+        <a href="./list-all-saved-quotes.html">List All Quotes (Local)</a>
+    </div>
+    <textarea class="textarea" id="quote" cols="40" rows="20"></textarea>
+    <label class="centerme">
+        Author
+        <textarea class="textarea" id="author" cols="40" rows="3"></textarea>
+    </label>
+    <div id="btn">
+        <button onclick="getQuote()">Save</button>
+    </div>
+
+    <script>
+        function getQuote() {
+            let localDB = localStorage.getItem('quotes') ? JSON.parse(localStorage.getItem('quotes')) : []
+            if (localDB.length) {
+                let index = (Math.round((Math.random() * 100)) % localDB.length)
+                console.log(index)
+                let data = localDB[index - 1]
+                const div = document.getElementById('quote')
+                div.textContent = `${data.quote} \n\n-${data.author}`
+            }
+        }
+
+
+
+        let obj
+        getQuote()
+    </script>
+</body>
+
+</html>

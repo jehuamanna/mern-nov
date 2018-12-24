@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>javascript XML</title>
+</head>
+<body>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/babel.js"></script>
+
+	<div id="root">
+		
+	</div>
+
+	<script type="text/babel">
+		const rootHandle = document.getElementById('root');
+
+        //props willl be title and count
+        function FeatureList(props){
+            //supposed to return
+            // title inside h2 and optionNumber inside p
+
+            return (
+                <div>
+                    <h2> { props.title} </h2>
+                    <p> {props.optionNumber} </p>
+                    <hr/>
+                </div>
+
+            )
+        }
+        
+        // this is because react can return only one component. So we return multiple component in one single div
+        
+        function App(props) {
+            return (
+                <div>
+                    {
+                        props.features.map(function(feature){
+                            return <FeatureList key={feature.id} title={feature.title} optionNumber={feature.count}/>
+                        })
+                    }
+                    
+                </div>
+            )
+
+        }
+
+		ReactDOM.render(<App features={[
+            {id: 1, title: 'popular brand', count: 17},
+            {id: 2, title: 'express delivery', count:16},
+            {id: 3, title: 'free delivery', count: 18}
+
+        ]}/>,rootHandle);
+	</script>
+
+</body>
+</html>

@@ -27,11 +27,22 @@
         }
 
         function App() {
+
+            //make api calls
+            const restaurants = [
+                {id: 1, name: 'hari', type: 'fast food', rating: 4.4},
+                {id: 2, name: 'cool joint', type: 'fast food', rating: 4.3},
+                {id: 3, name: 'pool joint', type: 'fast food', rating: 4.2}
+            ]
+
             return (
                 <div>
                     <h2> Swizzy </h2>
-                    <Restaurant name="Hari Sandwich" type="Fast Food" rating="4.2"/>
-                    <Restaurant name="Cool Joint" type="Fast Food" rating="4.2"/>
+                    {
+                        restaurants.map(function(restaurant){
+                            return <Restaurant key={restaurant.id} name={restaurant.name} type={restaurant.type} rating={restaurant.rating}/>
+                        })
+                    }
                     
                 </div>
             )
