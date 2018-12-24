@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/babel.js"></script>
+
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        const rootHandle = document.getElementById('root');
+        
+        class ShoutOut extends React.Component {
+            constructor(){
+                super()
+                this.state = {
+                    value: 'shout at me',
+                    typePass: "password"
+                }
+                this.toCaps = this.toCaps.bind(this)
+                this.toggle = this.toggle.bind(this)
+
+            }
+            toCaps() {
+                this.setState(function(previousState){
+                    return {
+                        value: previousState.value.toUpperCase()
+                    }
+                })
+            }
+            toggle() {
+                this.setState(function(previousState){
+
+                    if(previousState.typePass == 'password')
+                    return { typePass : "text"}
+                    else {
+                        return {
+    
+                            typePass: "password"
+                        }
+
+                    }
+                })
+            }
+
+            render(){
+                return (
+                <div>
+                    <h2>{this.state.value}</h2>
+                    <button onClick={this.toCaps}> Shout Out</button>
+                    <input type={this.state.typePass} />   
+                    <button onClick={this.toggle}>Show Password</button>
+                </div>
+            )
+
+            } 
+        }
+
+
+		ReactDOM.render(<ShoutOut/>,rootHandle);
+	</script>
+
+</body>
+
+</html>

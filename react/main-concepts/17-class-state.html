@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/babel.js"></script>
+
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        const rootHandle = document.getElementById('root');
+        class Counter extends React.Component{
+            constructor (props){
+                super(props)
+                this.state = { 
+                    value: this.props.countMe
+                }
+                this.handleClickUp = this.handleClickUp.bind(this)
+                this.handleClickDown = this.handleClickDown.bind(this)
+            }
+
+            handleClickUp() {
+                // state must not be updataed in the below mentioned way
+                // this.state.value = this.state.value + 1
+                this.setState(function(prevState){
+                    return {
+                        value: prevState.value + 1
+                    }
+                })
+            }
+
+            handleClickDown() {
+                this.setState(function(prevState){
+                    let myValue =  prevState.value 
+                    myValue = myValue - 1
+                    if(myValue<=0){
+                        myValue = 0
+                    }
+                    return {
+                        value: myValue
+                    }
+                })
+            }
+
+            render() {
+            console.log('render called')
+            console.log(this.props.countMe)
+            return(
+                <div>
+                    <h2> { this.state.value}</h2>
+                    <p>{this.state.value}</p>
+                    <em>{this.state.value}</em>
+                    <button onClick={this.handleClickUp}> Up</button>
+                    <button onClick={this.handleClickDown}> Down</button>
+                </div>
+            )
+        }
+        }
+        
+
+        function App(){
+            return (
+                <div>
+                    <Counter countMe={5}/>    
+                </div>
+            )
+        }
+
+		ReactDOM.render(<App/>,rootHandle);
+	</script>
+
+</body>
+
+</html>

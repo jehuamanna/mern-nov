@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>javascript XML</title>
+</head>
+<body>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/babel.js"></script>
+
+	<div id="root">
+		
+	</div>
+
+	<script type="text/babel">
+        const rootHandle = document.getElementById('root');
+        
+        class Greet extends React.Component{
+            render(){
+                return (
+                    <div>
+                        <h2> Hello {this.props.name} </h2>
+                    </div>
+                )
+            }
+        }
+
+        class App extends React.Component {
+            render () {
+                return (
+                    <div>
+                        <Greet name="Jehu"/>
+                        <Greet name="Ani"/>    
+                    </div>
+                )
+            }
+        }
+
+
+		ReactDOM.render(<App/>,rootHandle);
+	</script>
+
+</body>
+</html>

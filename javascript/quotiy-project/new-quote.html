@@ -41,7 +41,7 @@
 
         }
 
-        .centerme{
+        .centerme {
             top: 0;
             bottom: 0;
             left: 0;
@@ -50,6 +50,7 @@
             margin: auto;
 
         }
+
         .quote {
             top: 0;
             bottom: 0;
@@ -83,25 +84,57 @@
         <textarea class="textarea" id="author" cols="40" rows="3"></textarea>
     </label>
     <div id="btn">
-        <button onclick="getQuote()">Save</button>
+        <button onclick="saveQuote()">Save</button>
     </div>
 
     <script>
-        function getQuote() {
-            let localDB = localStorage.getItem('quotes') ? JSON.parse(localStorage.getItem('quotes')) : []
-            if (localDB.length) {
-                let index = (Math.round((Math.random() * 100)) % localDB.length)
-                console.log(index)
-                let data = localDB[index - 1]
-                const div = document.getElementById('quote')
-                div.textContent = `${data.quote} \n\n-${data.author}`
+        function saveQuote() {
+            const quoteTA = document.getElementById('quote')
+            const authorTA = document.getElementById('author')
+
+            const btn = document.getElementById('btn')
+
+            const obj = {}
+
+            function save() {
+                obj.quote = quoteTA.value
+                obj.author = authorTA.value
+
+                let localDB = localStorage.getItem('quotes') ? JSON.parse(localStorage.getItem('quotes')) : []
+                localDB.forEach(function (quote) {
+                    if ((quote.quote == obj.quote) && quote.author == obj.author) {
+                        saved = true
+                    }
+
+                })
+                if (saved) {
+                    saved = false
+                    btn.textContent = 'Save'
+                    btn.disabled = false
+                }
+                else {
+                    saved = true
+                    btn.textContent = 'Saved'
+                    btn.disabled = true
+                    localDB.push(obj)
+                    localStorage.setItem('quotes', JSON.stringify(localDB))
+                }
             }
+            
+            function releaseButton() {
+                saved = false
+                btn.textContent = "Save"
+                btn.disabled = false
+            }
+
+            btn.addEventListener('click', save)
+            quoteTA.addEventListener('keyup', releaseButton)
+            authorTA.addEventListener('keyup', releaseButton)
         }
 
+        let saved = false
 
 
-        let obj
-        getQuote()
     </script>
 </body>
 
