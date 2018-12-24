@@ -85,10 +85,78 @@
         localDB.forEach(function (quote, index) {
             const div = document.createElement('div')
             div.className = "centerme"
-            div.textContent = `${quote.quote} \n\n-${quote.author}`            
-            div.appendChild(document.createElement('hr'))
             document.body.appendChild(div)
+
+            createEditRemoveButton(div, localDB, index, quote)
+
         })
+
+        function createEditRemoveButton(div, localDB, index, quote){
+            div.textContent = `${quote.quote} \n\n-${quote.author}`            
+
+            const div2 = document.createElement('div')
+            const editBtn = document.createElement('button')
+            const removeBtn = document.createElement('button')
+            editBtn.textContent = "Edit"
+            removeBtn.textContent = "Remove"
+            editBtn.addEventListener('click', function(){
+                div.innerHTML = ""
+                createEditBox(div, localDB, index, quote)
+            })
+            removeBtn.addEventListener('click', function(){
+                div.remove()
+                removeItem(localDB, quote)
+                localStorage.setItem('quotes', JSON.stringify(localDB)) 
+            })
+            div2.appendChild(editBtn)
+            div2.appendChild(removeBtn)
+            div.appendChild(div2)
+            div.appendChild(document.createElement('hr'))
+
+        }
+
+        function removeItem(localDB, quote){
+            localDB.forEach(function(item, index){
+                if(item.quote == quote.quote){
+                    localDB.splice(index, 1)
+                }
+            })
+        }
+        function createEditBox(div, localDB, index, quote){
+            const quoteTa = document.createElement('textarea')
+            const authorTa = document.createElement('textarea')
+            quoteTa.cols = "40"
+            quoteTa.rows = "20"
+            authorTa.cols = "10"
+            authorTa.rows = "8"
+            quoteTa.id = "quote_textarea"
+            authorTa.id = "author_textarea"
+            quoteTa.value = quote.quote
+            authorTa.value = quote.author
+            div.appendChild(quoteTa)
+            div.appendChild(authorTa)
+            
+            const updateBtn = document.createElement('button')
+            const cancelBtn = document.createElement('button')
+            updateBtn.textContent = "Update"
+            cancelBtn.textContent = "Cancel"
+            cancelBtn.addEventListener('click', function(){
+                div.innerHTML = ""
+                createEditRemoveButton(div,localDB, index, quote)
+
+            })
+            updateBtn.addEventListener('click', function(){
+                quote.quote = quoteTa.value
+                quote.author = authorTa.value
+                localStorage.setItem('quotes', JSON.stringify(localDB)) 
+                div.innerHTML = ""
+                createEditRemoveButton(div,localDB, index, quote)
+
+            })
+            div.appendChild(updateBtn)
+            div.appendChild(cancelBtn)
+
+        }
 
     </script>
 </body>

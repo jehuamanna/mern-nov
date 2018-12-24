@@ -76,7 +76,7 @@
             if(localDB.length){
                 let index = (Math.round((Math.random() *100)) % localDB.length)
                 console.log(index)
-                let data = localDB[index-1]
+                let data = localDB[index]
                 const div = document.getElementById('quote')
                 div.textContent = `${data.quote} \n\n-${data.author}`
             }
