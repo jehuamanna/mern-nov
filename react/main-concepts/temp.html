@@ -1,68 +1,50 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Parent Child Component</title>
+    <title>javascript XML</title>
 </head>
+
 <body>
-	<script src="js/react.js"></script>
-	<script src="js/react-dom.js"></script>
-	<script src="js/babel.js"></script>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/babel.js"></script>
 
-	<div id="root">
-		
-	</div>
+    <div id="root">
 
-	<script type="text/babel">
-        const rootHandle = document.getElementById('root');
-       
-        class Parent extends React.Component{
+    </div>
+
+    <script type="text/babel">
+		class Items extends React.Component{
             constructor() {
-                super()
-                this.state = {
-                    value : 0
-                }
-                this.clickMe = this.clickMe.bind(this)
+                super() 
+                this.state: {
+                    items = [
+                        {id: 1, name: "book"},
+                        {id: 2, name: "pen"},
+                        {id: 3, name: "pencil"}
+                    ]
+                }               
             }
 
-            clickMe () {
-                this.setState(function(previousState){
-                    return {
-                        value: previousState.value + 1
-                    }
-                })
-            }
-
-            render (){
-                return(
+            render() {
+                return (
                     <div>
-                        <h2>{this.state.value}</h2>
-                        <Child myClick={this.clickMe} />
+                        this.state.items.map(item => {
+                            return <SingleItem />
+                        })
                     </div>
                 )
             }
         }
 
-        class Child extends React.Component {
+        class SingleItem extends React.Component{
             constructor() {
                 super()
-                this.clickMe = this.clickMe.bind(this)
-            }
-
-            clickMe() {
-                this.props.myClick()
-            }
-            render() {
-                return (
-                    <button onClick={this.clickMe}> Click Me </button>
-                )
             }
         }
-
-        
-
-
-		ReactDOM.render(<Parent/>,rootHandle);
 	</script>
 
 </body>
+
 </html>

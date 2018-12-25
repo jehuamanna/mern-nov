@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>javascript XML</title>
+</head>
+<body>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+    <script src="js/babel.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+	<div id="root">
+		
+	</div>
+
+	<script type="text/babel">
+		const rootHandle = document.getElementById('root')
+        class Users extends React.Component{
+            constructor() {
+                super()
+                this.state = {
+                    users: null,
+                    loading: true
+                }
+            }
+            componentDidMount() {
+                axios.get('https://jsonplaceholder.typicode.com/users/1').then(response => {
+                    this.setState({
+                        user:response.data,
+                        loading : false
+                    })
+                })
+            }
+
+            render () {
+                return (
+                    <div>
+                       {this.state.loading
+                        ?<p>Fetching data</p>
+                        : <p> Name - {this.state.user.name} City - { this.state.user.address.city}</p>
+                        }                        
+                    </div>
+                )
+            }
+        }
+
+		ReactDOM.render(<Users/>,rootHandle)
+	</script>
+
+</body>
+</html>

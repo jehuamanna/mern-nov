@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>javascript XML</title>
+</head>
+<body>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+    <script src="js/babel.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+	<div id="root">
+		
+	</div>
+
+	<script type="text/babel">
+		const rootHandle = document.getElementById('root')
+        class Users extends React.Component{
+            constructor() {
+                super()
+                this.state = {
+                    users: [],
+                    filteredUsers: [],
+                    loading:true
+                }
+                this.handleChange = this.handleChange.bind(this)
+            }
+            componentDidMount() {
+                    axios.get('https://jsonplaceholder.typicode.com/users').then(response => {
+                        this.setState({
+                            users:response.data,
+                            filteredUsers:response.data,
+                            loading:false
+                        })
+                    })
+            }
+
+            fallBack() {
+                return <img src="./images/spinner.gif" alt="spinner" />
+            }
+
+            handleChange(event){
+                event.persist()
+                this.setState(prevState => ({
+                    filteredUsers: prevState.users.filter(user => user.name.toLowerCase().indexOf(event.target.value.toLowerCase()) >=0)
+                }))
+            }
+
+            display(){
+                return (
+                    <div>
+                        <input type="text" placeholder="search" onChange={this.handleChange}/>
+                            <h2> Listing Users - {this.state.filteredUsers.length}</h2>
+                        <ul>
+                            {this.state.filteredUsers.map(user => {
+                                return <li key={user.id}> {user.name}</li>
+                            })}    
+                        </ul>
+                    </div>
+                )
+            }
+            render () {
+                return (
+                    <div>
+                        {this.state.loading? this.fallBack(): this.display()}
+                        
+                    </div>
+                )
+            }
+        }
+
+		ReactDOM.render(<Users/>,rootHandle)
+	</script>
+
+</body>
+</html>

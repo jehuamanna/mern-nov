@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>javascript XML</title>
+</head>
+<body>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/babel.js"></script>
+
+	<div id="root">
+		
+	</div>
+
+	<script type="text/babel">
+		const rootHandle = document.getElementById('root')
+        class Greet extends React.Component{
+            constructor () {
+                super()
+                console.log('inside constructor - 1')
+            }
+            componentWillMount() {
+                console.log('inside component wil mount - 2')
+            }
+            componentDidMount(){
+                console.log('inside component did mount - 4')
+            }
+            render() {
+                console.log('inside render - 3')
+                return (
+                    <div>
+                        <h2> Greet Method</h2>    
+                    </div>
+                )
+            }
+        }
+
+		ReactDOM.render(<Greet/>,rootHandle)
+	</script>
+
+</body>
+</html>
