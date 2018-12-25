@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Word Count</title>
+</head>
+
+<body>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/babel.js"></script>
+
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+        const rootHandle = document.getElementById('root');
+        
+        class WordCount extends React.Component{
+            constructor() {
+                super()
+
+                this.state = {
+                    words: 0,
+                    characters: 0
+                }
+                this.getCount = this.getCount.bind(this)
+
+            }
+
+            getCount(event) {
+                const value = event.target.value
+
+                this.setState(function(previousState){
+                    // const textArea = document.getElementById('textarea')
+                    const characters =  value.split('').length
+                    const words =  value.length? value.split(' ').length: 0
+                    return {
+                        words: words,
+                        characters: characters
+                    }
+
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <textarea id="textarea" onChange={this.getCount} rows={20} cols={40}></textarea>
+                        <p>There are {this.state.words} words and {this.state.characters} characters</p>
+                    </div>
+                )
+            }
+        }
+
+
+		ReactDOM.render(<WordCount />,rootHandle);
+	</script>
+
+</body>
+
+</html>

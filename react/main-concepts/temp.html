@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Parent Child Component</title>
+</head>
+<body>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/babel.js"></script>
+
+	<div id="root">
+		
+	</div>
+
+	<script type="text/babel">
+        const rootHandle = document.getElementById('root');
+       
+        class Parent extends React.Component{
+            constructor() {
+                super()
+                this.state = {
+                    value : 0
+                }
+                this.clickMe = this.clickMe.bind(this)
+            }
+
+            clickMe () {
+                this.setState(function(previousState){
+                    return {
+                        value: previousState.value + 1
+                    }
+                })
+            }
+
+            render (){
+                return(
+                    <div>
+                        <h2>{this.state.value}</h2>
+                        <Child myClick={this.clickMe} />
+                    </div>
+                )
+            }
+        }
+
+        class Child extends React.Component {
+            constructor() {
+                super()
+                this.clickMe = this.clickMe.bind(this)
+            }
+
+            clickMe() {
+                this.props.myClick()
+            }
+            render() {
+                return (
+                    <button onClick={this.clickMe}> Click Me </button>
+                )
+            }
+        }
+
+        
+
+
+		ReactDOM.render(<Parent/>,rootHandle);
+	</script>
+
+</body>
+</html>

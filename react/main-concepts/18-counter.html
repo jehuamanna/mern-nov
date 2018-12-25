@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Parent Child Component</title>
+</head>
+<body>
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/babel.js"></script>
+
+	<div id="root">
+		
+	</div>
+
+	<script type="text/babel">
+        const rootHandle = document.getElementById('root');
+        
+        class Parent extends React.Component{
+            constructor() {
+                super()
+                this.state = {
+                    value: 1
+                }
+                this.counter = this.counter.bind(this)
+
+            }
+            counter(name){
+                this.setState(function(previousState){
+                    return {
+                        value: previousState.value+1
+                    }
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h2> {this.state.value} </h2>
+                        <Child counterMethod={this.counter} />
+                    </div>
+                )
+                
+            }
+        }
+
+        class Child extends React.Component {
+            constructor() {
+                super()
+                this.handleClick = this.handleClick.bind(this)
+            }
+            handleClick() {
+                this.props.counterMethod()
+            }
+
+            render() {
+                return (
+                    <div>
+                        <button onClick={this.handleClick}>Click me</button>
+                    </div>
+                )
+            }
+        }
+
+
+
+		ReactDOM.render(<Parent/>,rootHandle);
+	</script>
+
+</body>
+</html>
