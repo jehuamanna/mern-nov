@@ -59,7 +59,7 @@
                             {this.state.items.map(item => {
                                 return <SingleItem key={item.id} id={item.id} name={item.name} price={item.price} quantity={item.quantity} total={item.price*item.quantity}  handleRemove={this.handleRemove} />
                             })}    
-                        </ul> 
+                        </ul>
 
                         <h2>Subtotal: {this.subTotal()}</h2>
                     </div>
