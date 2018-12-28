@@ -3,6 +3,12 @@ import TableComponent from './Table'
 import Form from './Form'
 import SearchAndSort from './SearchAndSort'
 import axios from 'axios'
+import { Chart } from 'react-google-charts';
+
+
+
+
+
 
 
 class TicketMaster extends React.Component {
@@ -10,8 +16,7 @@ class TicketMaster extends React.Component {
         super()
         this.state = {
             tickets: [],
-            originalTickets: [],
-            progress: 0
+            originalTickets: []
 
         }
         this.setData = this.setData.bind(this)
@@ -32,16 +37,7 @@ class TicketMaster extends React.Component {
 
     }
 
-    componentDidUpdate() {
-        // let closedTickets = this.state.tickets.filter(function (ticket) {
-        //     return ticket.status == 'closed'
 
-        // })
-
-        // let prog = Math.round((closedTickets.length / this.state.originalTickets.length) * 100)
-        // this.setState({ progress: prog })
-        // console.log(prog)
-    }
 
     setData(formDetails) {
         this.setState({
@@ -121,15 +117,109 @@ class TicketMaster extends React.Component {
     }
 
     render() {
+        let closedTickets = this.state.tickets.filter(function (ticket) {
+            return ticket.status == 'closed'
+
+        })
+
+        let progress = Math.round((closedTickets.length / this.state.originalTickets.length) * 100)
+
+
+
+        let countHigh = this.state.originalTickets.filter(function (ticket) {
+            return ticket.priority == 'high'
+        }).length
+
+        let countMedium = this.state.originalTickets.filter(function (ticket) {
+            return ticket.priority == 'medium'
+        }).length
+
+        let countLow = this.state.originalTickets.filter(function (ticket) {
+            return ticket.priority == 'low'
+        }).length
+
+        let highHr = this.state.tickets.filter(function(ticket){
+            return ticket.priority == 'high' && ticket.department == "hr"
+        }).length
+
+
 
         return (
+
+
             <div>
-                <SearchAndSort search={this.search} sort={this.sort} progress={this.state.progress} />
+                <SearchAndSort search={this.search} sort={this.sort} progress={progress} />
                 <TableComponent setData={this.setNewData} tickets={this.state.tickets} statusChange={this.statusChange} />
                 <Form setData={this.setData} />
+
+                <Chart
+                    width={'500px'}
+                    height={'300px'}
+                    chartType="PieChart"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                        ['Tickets', 'Priority'],
+                        ['High', countHigh],
+                        ['Medium', countMedium],
+                        ['Low', countLow],
+                    ]}
+                    options={{
+                        title: 'My Daily Activities',
+                    }}
+                    rootProps={{ 'data-testid': '1' }}
+                />
+                <Chart
+                    width={'500px'}
+                    height={'300px'}
+                    chartType="Bar"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                        ['Priority', 'Hr', 'Technical', 'Sales'],
+                        ['High',
+                         this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'high' && ticket.department == "hr"
+                        }).length,
+                        this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'high' && ticket.department == "technical"
+                        }).length
+                        , this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'high' && ticket.department == "sales"
+                        }).length
+                    ],
+                        ['Medium', this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'medium' && ticket.department == "hr"
+                        }).length, 
+                        this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'medium' && ticket.department == "technical"
+                        }).length, this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'medium' && ticket.department == "sales"
+                        }).length
+                    ],
+                        ['Low', this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'low' && ticket.department == "hr"
+                        }).length, 
+                        this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'low' && ticket.department == "technical"
+                        }).length, this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'low' && ticket.department == "sales"
+                        }).length
+                    ]
+                    ]}
+                    options={{
+                        // Material design options
+                        chart: {
+                            title: 'Priority',
+                            subtitle: 'Hr, Technical, Sales',
+                        },
+                    }}
+                    // For tests
+                    rootProps={{ 'data-testid': '2' }}
+                />
             </div>
         )
     }
 }
+
+
 
 export default TicketMaster

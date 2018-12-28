@@ -32,10 +32,10 @@ class SearchAndSort extends React.Component {
         return (
             <div>
                 <input type="text" placeholder="search" onChange={this.handleChange}/><br/>
-                <Button color="secondary" value="all" onClick={this.clickHandle} name='all'>All</Button>
-                <Button color="secondary" value="high" onClick={this.clickHandle} name='high'>High</Button>
-                <Button color="secondary" value="medium" onClick={this.clickHandle} name='medium'>Medium</Button>
-                <Button color="secondary" value="low" onClick={this.clickHandle} name='low'>Low</Button><br/>
+                <Button color="secondary" value="all" onClick={this.clickHandle} name='all'>All</Button> &emsp;
+                <Button color="secondary" value="high" onClick={this.clickHandle} name='high'>High</Button>&emsp;
+                <Button color="secondary" value="medium" onClick={this.clickHandle} name='medium'>Medium</Button>&emsp;
+                <Button color="secondary" value="low" onClick={this.clickHandle} name='low'>Low</Button><br/>&emsp;
 
                 <Progress color="info" value={this.props.progress} />
             </div>
