@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 class Api extends React.Component{
     constructor() {
@@ -21,7 +22,7 @@ class Api extends React.Component{
             <div>
                 <ul>
                 {this.state.users.map(function(user){
-                    return <li>{user.username}</li>
+                    return <li key={user.componentDidMount}><Link to={`/users/${user.id}`}>{user.username}</Link> </li>
                 })}
 
                 </ul>

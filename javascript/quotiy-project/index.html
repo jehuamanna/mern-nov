@@ -104,8 +104,8 @@
             }
 
         }
+
         function clicked() {
-            console.log("clicked")
             let localDB = localStorage.getItem('quotes') ? JSON.parse(localStorage.getItem('quotes')) : []
             localDB.forEach(function (quote) {
                 if (quote.quote == obj.quote) {

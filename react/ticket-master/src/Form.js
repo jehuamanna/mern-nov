@@ -29,8 +29,8 @@ class Form extends React.Component {
         }
         console.log(formData)
         axios.post('http://dct-api-data.herokuapp.com/tickets?api_key=6fc7ce15eecbbb73', formData).then(function(response){
-            console.log(response)
-        })
+            this.props.setData(response.data)
+        }.bind(this))
 
     }
 
