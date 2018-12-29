@@ -1,29 +1,39 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 class ShowUser extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             user: '',
-            loading: true
+            loading: false
         }
     }
 
 
-    componentDidMount(){
-        const id = this.props.match.params.id
-        axios.get(`https://jsonplaceholder.typicode.com/users/${id}`).then(response => {
-            this.setState({
-                user: response.data,
-                loading: false
-            })
-        })
-    }
+    // componentDidMount(){
+    //     const id = this.props.match.params.id
+    //     axios.get(`https://jsonplaceholder.typicode.com/users/${id}`).then(response => {
+    //         this.setState({
+    //             user: response.data,
+    //             loading: false
+    //         })
+    //     })
+    // }
 
     render () {
         console.log(this.props)
+        let id, email,username
+        if(this.props.location.state){
+            const {state} = this.props.location
+            id = state.id
+            email = state.email
+            username = state.username
+        }
+        else{
+            return <Redirect to='/404'/>
+        }
         return(
             <div>
                 <h2> User Detail</h2>
@@ -31,9 +41,9 @@ class ShowUser extends React.Component {
                     this.state.loading
                     ? <p>Loading</p>
                     : <div>
-                    <p>id - {this.state.user.name}</p>
-                    <p>email - {this.state.user.email}</p>
-                    <p>username - {this.state.user.username}</p>
+                    <p>id - {id}</p>
+                    <p>email - {email}</p>
+                    <p>username - {username}</p>
                     <Link to="/users" >back</Link>
                     </div>
                 }

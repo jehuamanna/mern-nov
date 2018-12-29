@@ -164,7 +164,7 @@ class TicketMaster extends React.Component {
                         ['Low', countLow],
                     ]}
                     options={{
-                        title: 'My Daily Activities',
+                        title: 'Priorities',
                     }}
                     rootProps={{ 'data-testid': '1' }}
                 />
@@ -174,42 +174,38 @@ class TicketMaster extends React.Component {
                     chartType="Bar"
                     loader={<div>Loading Chart</div>}
                     data={[
-                        ['Priority', 'Hr', 'Technical', 'Sales'],
+                        ['Priority', 'Open', 'Closed'],
                         ['High',
                          this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'high' && ticket.department == "hr"
+                            return ticket.priority == 'high' && ticket.status == 'open'
                         }).length,
                         this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'high' && ticket.department == "technical"
+                            return ticket.priority == 'high' && ticket.status == 'closed'
                         }).length
-                        , this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'high' && ticket.department == "sales"
-                        }).length
+                        
                     ],
-                        ['Medium', this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'medium' && ticket.department == "hr"
+                        ['Medium', 
+                        this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'medium' && ticket.status == 'open'
                         }).length, 
                         this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'medium' && ticket.department == "technical"
-                        }).length, this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'medium' && ticket.department == "sales"
-                        }).length
+                            return ticket.priority == 'medium' && ticket.status == 'closed'
+                        }).length, 
                     ],
-                        ['Low', this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'low' && ticket.department == "hr"
+                        ['Low', 
+                        this.state.tickets.filter(function(ticket){
+                            return ticket.priority == 'low' && ticket.status == 'open'
                         }).length, 
                         this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'low' && ticket.department == "technical"
-                        }).length, this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'low' && ticket.department == "sales"
-                        }).length
+                            return ticket.priority == 'low' && ticket.status == 'closed'
+                        }).length, 
                     ]
                     ]}
                     options={{
                         // Material design options
                         chart: {
                             title: 'Priority',
-                            subtitle: 'Hr, Technical, Sales',
+                            subtitle: 'Open/Closed',
                         },
                     }}
                     // For tests

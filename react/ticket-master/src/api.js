@@ -22,7 +22,16 @@ class Api extends React.Component{
             <div>
                 <ul>
                 {this.state.users.map(function(user){
-                    return <li key={user.componentDidMount}><Link to={`/users/${user.id}`}>{user.username}</Link> </li>
+                    return <li key={user.componentDidMount}><Link to={{
+                            pathname:`/users/${user.id}`,
+                            state:{
+                                id:user.id,
+                                username:user.username,
+                                email:user.email,
+                                name:user.name
+
+                            }}
+                    }>{user.username}</Link> </li>
                 })}
 
                 </ul>
