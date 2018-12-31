@@ -17,24 +17,35 @@ export default class RandomQuoteLocal extends React.Component {
 
     clickHandle() {
         let localDB = localStorage.getItem('quotes')? JSON.parse(localStorage.getItem('quotes')) : []
-        let index = Math.round(Math.random()*100 % localDB.length-1)
+        let index = Math.floor(Math.random()*100 % localDB.length)
+        console.log(index)
         this.setState({
             quote:localDB[index]
         })
 
     }
 
-
-    render () {
-
-        
-
+    displayQuote(){
         return (
             <div>
                 <h2>{this.state.quote.quoteText}</h2>
                 <h3>{this.state.quote.quoteAuthor}</h3>
                 <button onClick={this.clickHandle} >Get Quote</button>
             </div>
+        )
+    }
+
+    displayMessage() {
+        return <h2>Please save some quotes</h2>
+    }
+
+    render () {
+
+        return(
+        this.state.quote?
+         this.displayQuote()
+        
+        : this.displayMessage()
         )
     }
 }

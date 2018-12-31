@@ -19,7 +19,6 @@ export default class EditArea extends React.Component {
             quoteText: this.state.quoteText,
             quoteAuthor: this.state.quoteAuthor
         }
-        console.log(quote)
         this.props.editQuote(quote)
 
         this.props.changeEdit(false)

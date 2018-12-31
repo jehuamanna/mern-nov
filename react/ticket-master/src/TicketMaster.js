@@ -105,14 +105,14 @@ class TicketMaster extends React.Component {
         console.log(url)
         axios.put(url, formData).then(function (response) {
             // this.props.setData(response.data)            
-            let status = this.state.originalTickets.find(function (ticket) {
-                return ticket.ticket_code == id
-            })
-            status.status == "open" ? status.status = "closed" : status.status = "open"
-            console.log(status.status)
-            this.setState({})
-        }.bind(this))
 
+        }.bind(this))
+        let status = this.state.originalTickets.find(function (ticket) {
+            return ticket.ticket_code == id
+        })
+        status.status == "open" ? status.status = "closed" : status.status = "open"
+        console.log(status.status)
+        this.setState({})
 
     }
 
@@ -138,7 +138,7 @@ class TicketMaster extends React.Component {
             return ticket.priority == 'low'
         }).length
 
-        let highHr = this.state.tickets.filter(function(ticket){
+        let highHr = this.state.tickets.filter(function (ticket) {
             return ticket.priority == 'high' && ticket.department == "hr"
         }).length
 
@@ -149,8 +149,17 @@ class TicketMaster extends React.Component {
 
             <div>
                 <SearchAndSort search={this.search} sort={this.sort} progress={progress} />
-                <TableComponent setData={this.setNewData} tickets={this.state.tickets} statusChange={this.statusChange} />
-                <Form setData={this.setData} />
+
+                <div className="row">
+                    <div className="col-md-8">
+                        <TableComponent setData={this.setNewData} tickets={this.state.tickets} statusChange={this.statusChange} />
+
+                    </div>
+                    <div className="col-md-4">
+                        <Form setData={this.setData} />
+
+                    </div>
+                </div>
 
                 <Chart
                     width={'500px'}
@@ -176,30 +185,30 @@ class TicketMaster extends React.Component {
                     data={[
                         ['Priority', 'Open', 'Closed'],
                         ['High',
-                         this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'high' && ticket.status == 'open'
-                        }).length,
-                        this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'high' && ticket.status == 'closed'
-                        }).length
-                        
-                    ],
-                        ['Medium', 
-                        this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'medium' && ticket.status == 'open'
-                        }).length, 
-                        this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'medium' && ticket.status == 'closed'
-                        }).length, 
-                    ],
-                        ['Low', 
-                        this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'low' && ticket.status == 'open'
-                        }).length, 
-                        this.state.tickets.filter(function(ticket){
-                            return ticket.priority == 'low' && ticket.status == 'closed'
-                        }).length, 
-                    ]
+                            this.state.tickets.filter(function (ticket) {
+                                return ticket.priority == 'high' && ticket.status == 'open'
+                            }).length,
+                            this.state.tickets.filter(function (ticket) {
+                                return ticket.priority == 'high' && ticket.status == 'closed'
+                            }).length
+
+                        ],
+                        ['Medium',
+                            this.state.tickets.filter(function (ticket) {
+                                return ticket.priority == 'medium' && ticket.status == 'open'
+                            }).length,
+                            this.state.tickets.filter(function (ticket) {
+                                return ticket.priority == 'medium' && ticket.status == 'closed'
+                            }).length,
+                        ],
+                        ['Low',
+                            this.state.tickets.filter(function (ticket) {
+                                return ticket.priority == 'low' && ticket.status == 'open'
+                            }).length,
+                            this.state.tickets.filter(function (ticket) {
+                                return ticket.priority == 'low' && ticket.status == 'closed'
+                            }).length,
+                        ]
                     ]}
                     options={{
                         // Material design options

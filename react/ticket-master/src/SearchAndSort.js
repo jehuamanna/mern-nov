@@ -31,7 +31,9 @@ class SearchAndSort extends React.Component {
     render() {
         return (
             <div>
-                <input type="text" placeholder="search" onChange={this.handleChange}/><br/>
+                <div className="mb-3 mt-2 col-md-3">  
+                    <input type="text" placeholder="search" onChange={this.handleChange} className="form-control" />
+                </div>
                 <Button color="secondary" value="all" onClick={this.clickHandle} name='all'>All</Button> &emsp;
                 <Button color="secondary" value="high" onClick={this.clickHandle} name='high'>High</Button>&emsp;
                 <Button color="secondary" value="medium" onClick={this.clickHandle} name='medium'>Medium</Button>&emsp;

@@ -39,31 +39,47 @@ class Form extends React.Component {
             <div>
                 <h2>Add Ticket</h2>
                 <form onSubmit={this.onSubmit}>
-                    <label>
-                        Name
-                        <input type="text" value={this.state.name} onChange={this.changeHandle} name="name" />
-                    </label><br/>
 
-                    <label>Department
-                    <select value={this.state.department} name="department" onChange={this.changeHandle}>
+                <div className="form-group">
+                    <label>
+                            Name
+                            <input type="text" value={this.state.name} onChange={this.changeHandle} name="name" className="form-control" />
+                        </label>
+                </div>
+                  
+                <div className="form-group">
+
+                <label>Department
+                    <select value={this.state.department} name="department" onChange={this.changeHandle} className="form-control">
                             <option value="Sales">Sales</option>
                             <option value="hr">Hr</option>
                             <option value="technical">Technical</option>
                         </select>
-                    </label><br/>
+                    </label>
+                </div>
 
-                    <label>
-                        Priority
-                    <input type="radio" name="priority" value="high" onChange={this.changeHandle}/> High
+                
+
+                <div className="form-check form-check-inline">
+                    <label className="form-check-label">
+                        <input type="radio" name="priority" value="high" onChange={this.changeHandle}className="form-check-input" /> 
+                        High
+                    </label>
+                </div>
+                    
                     <input type="radio" name="priority" value="medium" onChange={this.changeHandle}/> Medium
                     <input type="radio" name="priority" value="low" onChange={this.changeHandle}/> Low
-                    </label><br/>
+                   <br/>
+
+                    <div className="form-group">
                     <label>
                         Message
-                        <textarea value={this.state.message} name="message" onChange={this.changeHandle}></textarea>
-                    </label><br/>
+                        <textarea value={this.state.message} name="message" onChange={this.changeHandle} className="form-control"></textarea>
+                    </label>
 
-                    <input type="submit" value="submit"/>
+                    </div>
+
+                    <input type="submit" value="submit" className="btn btn-primary"/>
 
                 </form>
             </div>

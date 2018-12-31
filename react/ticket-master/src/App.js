@@ -6,8 +6,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <ReactRouter />
-      <TicketMaster/>
+        <div className="container">
+          
+          <TicketMaster/>
+        </div>
       </div>
     );
   }
