@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table } from 'reactstrap';
+import TableRow from './TableRow';
 
 
 class TableComponent extends React.Component {
@@ -11,8 +12,8 @@ class TableComponent extends React.Component {
         this.handleChange = this.handleChange.bind(this)
     }
 
-    handleChange(event){
-        this.props.statusChange(event.target.name, event.target.value)
+    handleChange(name, value){
+        this.props.statusChange(name, value)
 
     }
 
@@ -32,20 +33,7 @@ class TableComponent extends React.Component {
                             <th> Status </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {
-                            this.props.tickets.map(function (data) {
-                                return (<tr key={data.ticket_code}>
-                                    <td>{data.ticket_code}</td>
-                                    <td>{data.name}</td>
-                                    <td>{data.department}</td>
-                                    <td>{data.priority}</td>
-                                    <td>{data.message}</td>
-                                    <td> <input type="checkbox" value={data.status} onChange={this.handleChange} name={data.ticket_code} checked={data.status == "closed"? "checked": "" }/></td>
-                                </tr>)
-                            }.bind(this))
-                        }
-                    </tbody>
+                    <TableRow tickets={this.props.tickets} loading={this.props.loading} statusChange={this.handleChange}/>
                 </Table>
             </div >
         )

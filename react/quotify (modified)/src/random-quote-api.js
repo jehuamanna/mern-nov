@@ -19,7 +19,13 @@ export default class RandomQuoteApi extends React.Component {
     }
 
     getApiQuotes() {
-        
+        axios.get('https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json').then(function (response) {
+            this.setState({
+                quoteText: response.data.quoteText,
+                quoteAuthor: response.data.quoteAuthor,
+                quoteId: Math.round(Math.random() * 10000000)
+            })
+        }.bind(this))
     }
 
     componentDidMount() {
@@ -63,8 +69,8 @@ export default class RandomQuoteApi extends React.Component {
     render() {
         return (
             <div>
-                <h2>{this.props.quote.quoteText}</h2>
-                <h3>-{this.props.quote.quoteAuthor}</h3>
+                <h2>{this.state.quoteText}</h2>
+                <h3>-{this.state.quoteAuthor}</h3>
                 <button class="btn btn-success" type="button" onClick={this.handleSaveToLocal} disabled={ this.state.buttonEnabled}>{ this.state.buttonEnabled?"Saved":'Save To Local'}</button>
                 <button class="btn btn-secondary" onClick={this.handleChange}>Get Another Quote</button>
             </div>)

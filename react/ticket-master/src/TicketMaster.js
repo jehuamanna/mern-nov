@@ -16,7 +16,11 @@ class TicketMaster extends React.Component {
         super()
         this.state = {
             tickets: [],
-            originalTickets: []
+            originalTickets: [],
+            loading: {
+                loading: false,
+                id: ""
+            }
 
         }
         this.setData = this.setData.bind(this)
@@ -101,18 +105,24 @@ class TicketMaster extends React.Component {
         let formData = {
             status: ticketStatus == "open" ? "closed" : "open"
         }
+        this.setState({ 
+                loading:{
+                    loading: true,
+                    id:id  
+            }
+        })
         let url = `http://dct-api-data.herokuapp.com/tickets/${id}?api_key=6fc7ce15eecbbb73`
         console.log(url)
         axios.put(url, formData).then(function (response) {
             // this.props.setData(response.data)            
-
+            let status = this.state.originalTickets.find(function (ticket) {
+                return ticket.ticket_code == id
+            })
+            status.status == "open" ? status.status = "closed" : status.status = "open"
+            console.log(status.status)
+            this.setState({ loading: false })
         }.bind(this))
-        let status = this.state.originalTickets.find(function (ticket) {
-            return ticket.ticket_code == id
-        })
-        status.status == "open" ? status.status = "closed" : status.status = "open"
-        console.log(status.status)
-        this.setState({})
+
 
     }
 
@@ -152,7 +162,7 @@ class TicketMaster extends React.Component {
 
                 <div className="row">
                     <div className="col-md-8">
-                        <TableComponent setData={this.setNewData} tickets={this.state.tickets} statusChange={this.statusChange} />
+                        <TableComponent setData={this.setNewData} tickets={this.state.tickets} statusChange={this.statusChange} loading={this.state.loading} />
 
                     </div>
                     <div className="col-md-4">
