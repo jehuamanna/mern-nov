@@ -1,0 +1,26 @@
+1. create a new app - called as contact-manager 
+2. setup the initial express app 
+3. routes to provided is 
+GET localhost:3000/contacts - should return all contacts 
+GET localhost:3000/contacts/:id - should return a contact 
+POST localhost:3000/contacts - should create a contact 
+PUT localhost:3000/contacts/:id - should update a contact 
+DELETE localhost:3000/contacts/:id - should delete a contact 
+4. how does a contact look 
+    { 
+        id: 1,
+        name: 'satish', 
+        email: 'satish@neenasam.com',
+        contact: [ '1234567890', '1234567901'],
+    }
+5. on the server before writing to the storage - also keep track of when the contact was created via the createdAt Field - new Date() 
+6. explore the fs module of node js 
+for storage you are supposed to create a json file for storage - contacts.json = []
+7. GET localhost:3000/contacts 
+    you are supposed to read from the contacts.json file and send the data to the client 
+8. POST localhost:3000/contacts 
+    you are supposed to read the incoming data via req.body and push it into the array inside the contacts.json file 
+9. PUT localhost:3000/contacts/:id 
+    you are supposed to read id and body,and then find the contact from contacts.json update it and then save it back 
+10. DELETE 
+
