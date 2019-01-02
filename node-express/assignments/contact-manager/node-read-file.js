@@ -1,7 +1,7 @@
 var fs = require("fs");
 
 // Asynchronous read
-fs.readFile('input.txt', function (err, data) {
+fs.readFile('contacts.json', function (err, data) {
    if (err) {
       return console.error(err);
    }

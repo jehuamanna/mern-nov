@@ -84,7 +84,7 @@ app.get('/products/:name', function(request, response){
 })
 
 
-const players = [
+let players = [
     {id: 1, name:'sachin'}
 ]
 
@@ -93,27 +93,55 @@ app.get('/players', function(req, res){
     res.send(players)
 })
 
-app.get('/players/:id', function(req,res){
+app.put('/players/:id', function(req,res){
+    let id = req.params.id
+    let body = req.body
     let player = players.find(function(player){
-        return player.id == req.params.id
+        return player.id == id
     })
+    console.log("helloworld")
+
     if(player){
-        res.send(player)
-    }else{
+        player.name = body.name
+        res.send({
+            player,
+            notice: "sucessfully updated the player"
+        })
+    } else{
         res.send({})
     }
 })
 
-app.post('/players', function(req, res){
-    console.log(req.method, req.url)
-    console.log('incoming data', req.body)
-    const data = req.body
-    player.push(data)
-    res.send({
-        player: data,
-        notice: 'successfully created a player'
+app.delete('/players/:id', function(req, res){
+    let id = req.params.id
+    players = players.filter(function(player){
+        return player.id != id
     })
+    res.send(players)
 })
+
+
+// app.get('/players/:id', function(req,res){
+//     let player = players.find(function(player){
+//         return player.id == req.params.id
+//     })
+//     if(player){
+//         res.send(player)
+//     }else{
+//         res.send({})
+//     }
+// })
+
+// app.post('/players', function(req, res){
+//     console.log(req.method, req.url)
+//     console.log('incoming data', req.body)
+//     const data = req.body
+//     player.push(data)
+//     res.send({
+//         player: data,
+//         notice: 'successfully created a player'
+//     })
+// })
 
 app.listen(port, function(){
     console.log('server up...listening on port', port)
