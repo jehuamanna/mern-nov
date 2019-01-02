@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
-const port=3001
+const port=3002
 
+
+app.use(express.json())
 //Route Handler
 // app.METHOD(path/url, Handler)
 
@@ -80,6 +82,39 @@ app.get('/products/:name', function(request, response){
         response.send({})
     }
 })
+
+
+const players = [
+    {id: 1, name:'sachin'}
+]
+
+app.get('/players', function(req, res){
+    console.log(req.method, req.url)
+    res.send(players)
+})
+
+app.get('/players/:id', function(req,res){
+    let player = players.find(function(player){
+        return player.id == req.params.id
+    })
+    if(player){
+        res.send(player)
+    }else{
+        res.send({})
+    }
+})
+
+app.post('/players', function(req, res){
+    console.log(req.method, req.url)
+    console.log('incoming data', req.body)
+    const data = req.body
+    player.push(data)
+    res.send({
+        player: data,
+        notice: 'successfully created a player'
+    })
+})
+
 app.listen(port, function(){
     console.log('server up...listening on port', port)
 })
