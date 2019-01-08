@@ -1,13 +1,13 @@
 //es5
-var username ='ani'
-var email = 'ani@gmail.com'
-var mobile = '1234567890'
+// var username ='ani'
+// var email = 'ani@gmail.com'
+// var mobile = '1234567890'
 
-var formData = {
-    username = username,
-    email = email,
-    mobile =mobile
-}
+// var formData = {
+//     username = username,
+//     email = email,
+//     mobile =mobile
+// }
 // console.log(formData)
 
 //es6

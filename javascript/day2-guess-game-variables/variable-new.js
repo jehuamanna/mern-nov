@@ -11,7 +11,7 @@ console.log(maxSpeed)
 const maxRounds = 5
 //maxRounds = 10
 
-//defining a vaiable using the keyword var will allow us to change the value in the future
+//defining a vaiable using the keyword let will allow us to change the value in the future
 let count = 0
 console.log(count)
 count++

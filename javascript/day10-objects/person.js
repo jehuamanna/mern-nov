@@ -32,7 +32,7 @@ console.log(Object.values(product)) // [ 'marker', 15, 'white board marker' ]
 console.log(Object.values(product).includes('marker')) // true
 console.log(Object.values(product).includes('camlin')) // false
 
-// to now if a property is present in obh
+// to know if a property is present in obj
 console.log(Object.keys(product).includes('reviews')) // false
 console.log(product.hasOwnProperty('name')) //true
 

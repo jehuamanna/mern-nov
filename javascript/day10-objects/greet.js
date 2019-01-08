@@ -9,5 +9,5 @@ const person = {
 
 console.log(person.name) // 'Arjun'
 console.log(person.greet) // [Function: greet]
-// greet is property / a methos
+// greet is property / a methods
 console.log(person.greet())

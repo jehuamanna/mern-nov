@@ -10,7 +10,7 @@ console.log(typeof temperature) //'number'
 // Math object
 
 console.log(Math.PI) //PI is a property
-console.log(Math.random()) //random is a property
+console.log(Math.random()) //random is a method
 console.log(Math.round(temperature)) //26
 console.log(Math.floor(temperature)) //26
 //temperature = Math.floor(temperature) // change the value of temperature

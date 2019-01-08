@@ -17,6 +17,7 @@ temp.round is not allowed.
 but allowed in ruby.
 
 Math object help us to deal with primitive type -> number
-Math.min or (max) you cannot pass an array. Returns NaN. should be passed as arguments. So use spread operator, [...]
+Math.min or (max) you cannot pass an array. Returns NaN. should be passed as arguments. 
+So use spread operator, [...]
 
 floating point arithematic is not always accurate in javascipt.

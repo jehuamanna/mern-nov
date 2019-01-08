@@ -1,5 +1,5 @@
 const axios = require('axios')
-
+console.log(process.argv)
 let url = `http://www.mapquestapi.com/geocoding/v1/address?key=A3lkhzw6pGokKkOIaGEUeDmWZecNhHpd&location=${process.argv[2]}`
 latLng = {}
 axios.get(url).then(function(response){
