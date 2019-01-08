@@ -14,7 +14,6 @@ export default class DisplayQuote extends React.Component {
 
     clickRemoveHandle() {
         this.props.removeQuote()
-        console.log("hiii")
     }
 
     render() {

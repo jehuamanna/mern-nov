@@ -28,30 +28,19 @@ export default class AddQuote extends React.Component {
             quoteAuthor: this.state.quoteAuthor,
             quoteId: Math.round(Math.random() * 1000000)
         }
-        console.log(quote)
-        let saved = false
-        localDB.forEach(quote => {
-            if(quote.quoteText === this.state.quoteText && quote.quoteAuthor === this.state.quoteAuthor){
-                saved = true
-                
-            }
+        this.props.addQuote(quote)
+        this.setState({
+            buttonDisabled: true
         })
-        if(!saved){
-            this.setState({
-                buttonDisabled: true
-            })
-            localDB.push(quote)
-            localStorage.setItem('quotes', JSON.stringify(localDB))
-        }
 
     }
 
     render () {
         return (
         <div>
-            <textarea  onChange={this.handleChange} name="quoteText" cols="40" rows="20"></textarea><br/>
+            <textarea  onChange={this.handleChange} name="quoteText" cols="40" rows="10"></textarea><br/>
             <input type="text" onChange={this.handleChange} name="quoteAuthor" /><br/>
-            <button class="btn btn-success" onClick={this.buttonHandle} disabled={this.state.buttonDisabled}>Add Quote</button>
+            <button className="btn btn-success" onClick={this.buttonHandle} disabled={this.state.buttonDisabled}>Add Quote</button>
         </div>
         )
     }

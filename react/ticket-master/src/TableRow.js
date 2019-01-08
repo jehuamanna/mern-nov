@@ -27,7 +27,7 @@ export default class TableRow extends React.Component {
                         <td> <input type="checkbox" value={data.status} onChange={this.handleChange} name={data.ticket_code} checked={data.status == "closed" ? "checked" : ""} />
                             {console.log(this.props.loading)}
                             {this.props.loading.loading && this.props.loading.id == data.ticket_code
-                                ? <img src="spinner.gif" alt="spinner" height="10px" width="10px"/>
+                                ? <img src="https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif" alt="spinner" height="22" width="22"/>
                                 : <div></div>
                             }
                         </td>

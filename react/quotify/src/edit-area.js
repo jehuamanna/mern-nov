@@ -26,7 +26,6 @@ export default class EditArea extends React.Component {
 
     handleCancel() {
         this.props.changeEdit(false)
-        console.log('hi')
     }
 
     handleChange(event) {

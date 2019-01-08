@@ -5,9 +5,6 @@ export default class RandomQuoteLocal extends React.Component {
     constructor() {
         super()
         this.clickHandle = this.clickHandle.bind(this)
-        this.state= { 
-            quote: "" 
-        }
         
     }
 
@@ -16,21 +13,16 @@ export default class RandomQuoteLocal extends React.Component {
     }
 
     clickHandle() {
-        let localDB = localStorage.getItem('quotes')? JSON.parse(localStorage.getItem('quotes')) : []
-        let index = Math.floor(Math.random()*100 % localDB.length)
-        console.log(index)
-        this.setState({
-            quote:localDB[index]
-        })
+        this.props.getRandomQuote()
 
     }
 
     displayQuote(){
         return (
             <div>
-                <h2>{this.state.quote.quoteText}</h2>
-                <h3>{this.state.quote.quoteAuthor}</h3>
-                <button class="btn btn-primary" onClick={this.clickHandle} >Get Quote</button>
+                <h2>{this.props.randomQuote.quoteText}</h2>
+                <h3>{this.props.randomQuote.quoteAuthor}</h3>
+                <button className="btn btn-primary" onClick={this.clickHandle} >Get Quote</button>
             </div>
         )
     }
@@ -41,11 +33,8 @@ export default class RandomQuoteLocal extends React.Component {
 
     render () {
 
-        return(
-        this.state.quote?
-         this.displayQuote()
-        
-        : this.displayMessage()
+        return( this.props.randomQuote? 
+        this.displayQuote(): this.displayMessage()
         )
     }
 }
