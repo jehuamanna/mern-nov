@@ -1,0 +1,19 @@
+npm init
+npm install --save express
+create index.js file
+const express = require('express')
+const app = express()
+const port = 3000
+app.get('/', (req, res) => {
+    res.send('Welcome to contact manager')
+})
+
+app.listen(port, () => {
+    console.log('listening to port ', port)
+})
+
+4.setup database
+    npm install --save mongoose
+
+5. in index file
+    const mongoose = require('mongoose')
