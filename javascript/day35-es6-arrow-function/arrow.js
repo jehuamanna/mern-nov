@@ -39,7 +39,7 @@ console.log(evens)
 // if we are returing an object from a function, we need to wrap the object in ()
 
 const personFunction = (name, city) =>({
-    name, city //we are using es6 concise properties
+    name, city // we are using es6 concise properties
 })
 
 console.log(personFunction('arjun', 'bangalore'))

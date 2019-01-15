@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <title>My own fetch or axios</title>
+    </head>
+    <body>
+        <script>
+            const myAxios = {
+                get: function(url){
+                    return new Promise(function(resolve, reject){
+                        const xhr = new XMLHttpRequest()
+                        xhr.open('GET', url)
+                        xhr.send()
+                        xhr.onload = function(){
+                            resolve(JSON.parse(xhr.responseText))
+                        }
+
+                        xhr.onerror = function(){
+                            reject(new Error('something went wrong'))
+                        }
+                    })
+                }
+            }
+
+            const myFetch = (url) => {
+                return new Promise(function(resolve, reject){
+                    const xhr = new XMLHttpRequest()
+                    xhr.open('GET', url)
+                    xhr.send()
+                    xhr.onload = function() {
+                        let response= {
+                            json: function(){
+                                return JSON.parse(xhr.responseText)
+                            }
+                        }
+                        resolve(response)
+                    }
+                    xhr.onerror = function() {
+                        reject(new Error('something went wrong'))
+                    }
+                })
+            }
+            
+            // myAxios.get('https://jsonplaceholder.typicode.com/users').then(function(response){
+            //     console.log(response)
+            // }).catch(function(err){
+            //     console.log(err)
+            // })
+            myFetch('http://dct-api-data.herokuapp.com/products.json').then(function(response){
+                let data = response.json()
+
+                function Store(){
+
+                }
+                Store.data = data
+                Store.findById = function(id){
+                    return new Promise(function(resolve, reject){
+                        let product = Store.data.find(function(prod){
+                            return prod.id == id
+                        })
+                        if(product){
+                            resolve(product)
+                        }
+                        else{
+                            reject(new Error('product not found'))
+                        }
+                    })
+                }
+
+                Store.findByIdAndUpdate = function(id, update){
+                    return new Promise(function(resolve, reject){
+                        let product = Store.data.find(function(prod){
+                            return prod.id == id
+                        })
+                        if(product){
+                            product = Object.assign(product, update)
+                            resolve(product)
+                        }
+                        else{
+                            reject(new Error('product not found'))
+                        }
+                    })
+                }
+
+                Store.findByIdAndDelete = function(id){
+                    return new Promise(function(resolve, reject){
+                        let products = Store.data.filter(function(prod){
+                            return prod.id != id
+                        })
+                        if(products){
+                            resolve(products)
+                        }
+                        else{
+                            reject(new Error('product not found'))
+                        }
+                    })
+                }
+
+                Store.all = function() {
+                    return new Promise(function(resolve, reject){
+                        let products = Store.data.filter(function(prod){
+                            return true
+                        })
+                        if(products){
+                            resolve(products)
+                        }
+                        else {
+                            reject(new Error('No products found'))
+                        }
+                    })
+                }
+
+                Store.findById(307).then(function(product){
+                    console.log('findbyid', product)
+                }).catch(function(err){
+                    console.log(err.message)
+                })
+
+                Store.findByIdAndUpdate(307, {name:'bla bla', cod: true}).then(function(product){
+                    console.log(product)
+                }).catch(function(err){
+                    console.log(err.message)
+                })
+
+                Store.all().then(function(products){
+                    console.log(products)
+                }).catch(function(err){
+                    console.log(err)
+                })
+                
+                Store.findByIdAndDelete(307).then(function(products){
+                    console.log(products)
+                }).catch(function(err){
+                    console.log(err)
+                })
+                
+                }).catch(function(err){
+                    console.log(err)
+            })
+        </script>
+    </body>
+</html>
