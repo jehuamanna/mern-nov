@@ -12,7 +12,7 @@ export default class ListAllQuotes extends React.Component {
 
     displayQuotes() {
         
-        return (
+        return (this.props.localDB.length === 0? <div>Please add some quotes...</div> :
             <div>
                 {this.props.localDB.map(function (quote) {
                     return <DisplayEditQuotes key={quote.quoteId} removeQuote={this.removeQuote} editQuote={this.editQuote} quote={quote} />

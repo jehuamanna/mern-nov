@@ -40,8 +40,8 @@ export default class EditArea extends React.Component {
             <div>
                 <textarea value={this.state.quoteText} cols="40" rows="20" name="quoteText" onChange={this.handleChange} ></textarea>
                 <input value={this.state.quoteAuthor} type="text" name="quoteAuthor" onChange={this.handleChange} />
-                <button class="btn btn-success" type="text" onClick={this.handleUpdate}>Update</button>
-                <button class="btn btn-secondary" type="text" onClick={this.handleCancel}>Cancel</button>
+                <button className="btn btn-success" type="text" onClick={this.handleUpdate}>Update</button>
+                <button className="btn btn-secondary" type="text" onClick={this.handleCancel}>Cancel</button>
             </div>
         )
     }

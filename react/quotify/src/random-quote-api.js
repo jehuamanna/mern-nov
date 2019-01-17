@@ -19,10 +19,6 @@ export default class RandomQuoteApi extends React.Component {
         
     }
 
-    componentDidMount() {
-        this.getApiQuotes()
-    }
-
     handleChange(){
         this.getApiQuotes()
         this.setState({

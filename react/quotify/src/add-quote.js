@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 export default class AddQuote extends React.Component {
     constructor () {
@@ -22,7 +24,6 @@ export default class AddQuote extends React.Component {
     }
     
     buttonHandle(){
-        let localDB = localStorage.getItem('quotes') ? JSON.parse(localStorage.getItem('quotes')) : []
         let quote = {
             quoteText: this.state.quoteText,
             quoteAuthor: this.state.quoteAuthor,
@@ -40,7 +41,7 @@ export default class AddQuote extends React.Component {
         <div>
             <textarea  onChange={this.handleChange} name="quoteText" cols="40" rows="10"></textarea><br/>
             <input type="text" onChange={this.handleChange} name="quoteAuthor" /><br/>
-            <button className="btn btn-success" onClick={this.buttonHandle} disabled={this.state.buttonDisabled}>Add Quote</button>
+            <Link to="/saved-quote"><button className="btn btn-success" onClick={this.buttonHandle} disabled={this.state.buttonDisabled}>Add Quote</button></Link>
         </div>
         )
     }

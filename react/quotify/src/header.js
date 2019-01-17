@@ -18,7 +18,6 @@ export default class Header extends React.Component {
                 quoteId: ''
             },
             randomQuote: '',
-            buttonEnabled: false,
             localDB: localStorage.getItem('quotes') ? JSON.parse(localStorage.getItem('quotes')) : []
 
         }
@@ -58,15 +57,16 @@ export default class Header extends React.Component {
                 saved = true
             }
         })
-        console.log(saved)
         if (!saved) {
             this.setState(function (prevState) {
                 return {
                     localDB: [...prevState.localDB, quoteO]
                 }
-            }, console.log(this.state.localDB))
+            }, () => {
+                localStorage.setItem('quotes', JSON.stringify(this.state.localDB))
+
+            })
             // localDB.push(quote)
-            localStorage.setItem('quotes', JSON.stringify(this.state.localDB))
         }
     }
 
@@ -115,15 +115,15 @@ export default class Header extends React.Component {
             }
         })
         if (!saved) {
-            this.setState({
-                buttonDisabled: true
-            })
             this.setState(function(prevState){
                 return {
                     localDB: [...prevState.localDB, quoteO]
                 }
+            }, () => {
+                console.log(this.state.localDB)
+                localStorage.setItem('quotes', JSON.stringify(this.state.localDB))
             })
-            localStorage.setItem('quotes', JSON.stringify(this.state.localDB))
+            
         }
     }
 
