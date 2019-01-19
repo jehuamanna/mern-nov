@@ -28,8 +28,9 @@ class Form extends React.Component {
             message: this.state.message
         }
         console.log(formData)
-        axios.post('http://dct-api-data.herokuapp.com/tickets?api_key=6fc7ce15eecbbb73', formData).then(function(response){
-            this.props.setData(response.data)
+        // axios.post('http://dct-api-data.herokuapp.com/tickets?api_key=6fc7ce15eecbbb73', formData).then(function(response){
+        axios.post('http://localhost:3001/tickets', formData).then(function(response){
+                this.props.setData(response.data)
         }.bind(this))
 
     }
@@ -51,9 +52,9 @@ class Form extends React.Component {
 
                 <label>Department
                     <select value={this.state.department} name="department" onChange={this.changeHandle} className="form-control">
-                            <option value="Sales">Sales</option>
-                            <option value="hr">Hr</option>
-                            <option value="technical">Technical</option>
+                            <option value="sales">sales</option>
+                            <option value="hr">hr</option>
+                            <option value="technical">technical</option>
                         </select>
                     </label>
                 </div>

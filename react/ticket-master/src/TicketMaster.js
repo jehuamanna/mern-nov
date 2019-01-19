@@ -29,7 +29,8 @@ class TicketMaster extends React.Component {
         this.statusChange = this.statusChange.bind(this)
     }
     componentDidMount() {
-        axios.get('http://dct-api-data.herokuapp.com/tickets?api_key=6fc7ce15eecbbb73').then(function (response) {
+        //axios.get('http://dct-api-data.herokuapp.com/tickets?api_key=6fc7ce15eecbbb73').then(function (response) {
+        axios.get(`http://localhost:3001/tickets`).then(function (response) {
             this.setState({
                 tickets: response.data,
                 originalTickets: response.data
@@ -111,7 +112,9 @@ class TicketMaster extends React.Component {
                     id:id  
             }
         })
-        let url = `http://dct-api-data.herokuapp.com/tickets/${id}?api_key=6fc7ce15eecbbb73`
+        //let url = `http://dct-api-data.herokuapp.com/tickets/${id}?api_key=6fc7ce15eecbbb73`
+        let url = `http://localhost:3001/tickets/${id}`
+
         console.log(url)
         axios.put(url, formData).then(function (response) {
             // this.props.setData(response.data)            
