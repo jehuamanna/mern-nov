@@ -48,7 +48,7 @@ router.get('/:id', (req,res) =>{
 router.delete('/contact/:id',(req, res) =>{
     const id = req.params.id
     Contact.findByIdAndDelete(id)
-    .then((contacts) => {
+    .then((contact) => {
         res.send(contact)
     
     })
