@@ -1,0 +1,39 @@
+const mongoose = require('mongoose')
+const sh = require('shorthash')
+
+
+const {Schema} = mongoose
+const contactSchema = new Schema({
+    title: {
+        type: String,
+        required : true,
+        minlength: 3,
+        maxlength: 128
+    },
+    original_url : {
+        type: String,
+        required: true,
+    },
+    tags : {
+        type: [String]
+    },
+    hashed_url: {
+        type: String,
+    },
+    createdAt: {
+        type: Date,
+        default : Date.now
+    }
+})
+
+contactSchema.pre('save',function(next) {
+    this.hashed_url = sh.unique(this.original_url)
+    next()
+
+})
+
+
+const Bookmark = mongoose.model('Bookmark', contactSchema)
+module.exports ={
+    Bookmark
+}
