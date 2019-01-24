@@ -23,7 +23,14 @@ const contactSchema = new Schema({
     createdAt: {
         type: Date,
         default : Date.now
-    }
+    },
+    clicks : [{
+        date: Date,
+        ipAddress: String,
+        browserName: String,
+        osType: String,
+        deviceType:String
+    }]
 })
 
 contactSchema.pre('save',function(next) {

@@ -1,15 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const {Bookmark} = require('../models/bookmark')
-router.get('/tags', (req, res) => {
-    console.log(req.query.names)
-    // const names = req.query.names.split(',')
-    
-    Bookmark.find({tags:{  '$in':req.query.names.split(',') }})
+
+router.get('/tags/', (req, res) => {
+    const tags=req.query.names.split(',')
+    Bookmark.find({tags:{"$in" :tags}})
     .then((bookmark) => {
         res.send(bookmark)
     })
     .catch((err) => {
+        console.log('ii')
         res.send(err)
     })
 })
@@ -17,6 +17,7 @@ router.get('/tags', (req, res) => {
 
 router.get('/tags/:name', (req, res) => {
     const name = req.params.name
+    console.log(name)
     Bookmark.find({tags:name})
         .then((bookmarks) => {
             res.send(bookmarks)
