@@ -1,0 +1,2 @@
+::1 - - [25/Jan/2019:04:15:29 +0000] "GET /bookmarks/dlsf HTTP/1.1" 304 - "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
+::1 - - [25/Jan/2019:06:59:09 +0000] "GET /bookmarks/dlsf HTTP/1.1" 404 23 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"

@@ -13,7 +13,7 @@ const { bookmarkRouter} = require('./app/controllers/url-controller')
 const { rootUrlRouter } = require('./app/controllers/root-url-controller')
 const { tagsRouter} = require('./app/controllers/tags-url-controller')
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log/access.log'), { flags: 'a' })
 app.use(morgan('combined', { stream: accessLogStream }))
 
 
@@ -22,7 +22,7 @@ app.use('/bookmarks', bookmarkRouter)
 app.use('/', rootUrlRouter)
 
 app.get('*', function(req, res){
-    res.status(500).send('Error - route not found');
+    res.status(404).send('Error - route not found');
   });
 
 app.listen(port, () => {

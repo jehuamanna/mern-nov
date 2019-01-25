@@ -35,8 +35,8 @@ router.get('/', (req, res) => {
         res.send(bookmarks)
     })
     .catch((err) => {
-        res.send(err)
-    })
+        res.status(404).send('Error - route not found')
+        })
 })
 
 router.get('/:id', (req, res) =>{
@@ -46,7 +46,7 @@ router.get('/:id', (req, res) =>{
         res.send(bookmark)
     })
     .catch((err) => {
-        res.send(err)
+        res.status(404).send('Error - route not found')
     })
 })
 
@@ -86,6 +86,10 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+
+router.get('*', function(req, res){
+    res.status(404).send('Error - route not found');
+  });
 
 module.exports = {
     bookmarkRouter : router
