@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const sh = require('shorthash')
+const validator = require('validator')
 
 
 const {Schema} = mongoose
@@ -12,6 +13,11 @@ const contactSchema = new Schema({
     },
     original_url : {
         type: String,
+        validate: {
+            validator: function(value) {
+                return isURL(value)
+            }
+        },
         required: true,
     },
     tags : {
