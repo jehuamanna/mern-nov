@@ -1,0 +1,3 @@
+::1 - - [24/Jan/2019:14:30:36 +0000] "GET /someurl/somehting HTTP/1.1" 500 23 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
+::1 - - [24/Jan/2019:14:30:41 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
+::1 - - [24/Jan/2019:14:30:50 +0000] "GET /bookmarks/ HTTP/1.1" 200 958 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
