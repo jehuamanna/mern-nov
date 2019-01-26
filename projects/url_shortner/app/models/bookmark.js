@@ -36,7 +36,11 @@ const contactSchema = new Schema({
         browserName: String,
         osType: String,
         deviceType:String
-    }]
+    }],
+    user : {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 })
 
 contactSchema.pre('save',function(next) {
