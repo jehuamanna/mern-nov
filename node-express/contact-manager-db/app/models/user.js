@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcryptjs = require('bcryptjs')
 const {Schema } = mongoose
+const jwt = require('jsonwebtoken')
 
 const userSchema = new Schema ({
     username: {
@@ -31,23 +32,34 @@ const userSchema = new Schema ({
     createdAt: {
         type:Date,
         default: Date.now
-    }
+    },
+    tokens: [
+        {
+            token:{
+                type:String
+            }
+        }
+    ]
 
 })
 
 userSchema.pre('save', function(next){
-    bcryptjs.genSalt(10)
-    .then(salt => {
-        bcryptjs.hash(this.password , salt)
-        .then(hashedPassword => {
-            this.password = hashedPassword
-            next()
-        })
-    }).catch(err => console.log(err))
+    if(this.isNew){
+        bcryptjs.genSalt(10)
+        .then(salt => {
+            bcryptjs.hash(this.password , salt)
+            .then(hashedPassword => {
+                this.password = hashedPassword
+                next()
+            })
+        }).catch(err => console.log(err))
+    } else{
+        next()
+    }
 })
 
 
-userSchema.statics.findByEmailAndPassword = function() {
+userSchema.statics.findByEmailAndPassword = function(email, password) {
     const User = this
     return User.findOne({email})
         .then((user) =>{
@@ -77,6 +89,49 @@ userSchema.statics.findByEmailAndPassword = function() {
                 return Promise.reject(err)
         })
 }
+
+
+userSchema.statics.findByToken = function(token) {
+    const User = this
+    let tokenData
+    try {
+        tokenData = jwt.verify(token, 'dct@welt533')
+
+    }
+    catch(err) {
+        return Promise.reject(err)
+    }
+
+    return User.findOne({
+        _id: tokenData.userId,
+        'tokens.token': token
+    })
+        .then((user) => {
+            return Promise.resolve(user)
+        })
+        .catch((err) =>{
+            return Promise.reject(err)
+        })
+}
+
+
+
+userSchema.methods.generateToken = function(){
+    const user = this
+    const tokenData = {
+        userId: user._id
+    }
+    const token = jwt.sign(tokenData, 'dct@welt533')
+    user.tokens.push({
+        token
+    })
+    return user.save().then((user) =>{
+        return token 
+    }).catch((err) =>{
+        return err
+    })
+}
+
 const User = mongoose.model('User', userSchema)
 
 module.exports = {

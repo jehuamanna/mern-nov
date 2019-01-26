@@ -22,11 +22,14 @@ router.post('/login', (req, res) => {
     const body = req.body
     //Static method is called on the model / class
     User.findByEmailAndPassword(body.email, body.password)
-        .then(() => {
-
+        .then((user) => {
+            return user.generateToken() 
+        }).then((token) =>{
+            res.header('x-auth', token).send()
         })
-        .catch(()=>{
-            
+        .catch((err)=>{
+            console.log(err)
+            res.send(err)
         })
 
 })
