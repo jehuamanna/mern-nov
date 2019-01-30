@@ -20,7 +20,7 @@
         const rootHandle = document.getElementById('root')
 
         const categoryInitialData = [{id: 1, name:'stationary'},{id:2, name:'electronics'}]
-        const categoriesReducer = (state = categoryInitialData, action, ) => {
+        const categoriesReducer = (state = categoryInitialData, action ) => {
             switch(action.type){
                 case "ADD_CATEGORY" :
                 return [...state, action.category]
