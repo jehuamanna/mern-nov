@@ -1,7 +1,7 @@
 // state - [ {id: 1}, name: 'ani', email: 'ani@gmail.com']
 const { createStore }= require('redux')
 const store = createStore((state =[], action)=> {
-switch(action){
+switch(action.type){
     case "ADD_USER":
     return state.concat(action.user)
     case 'REMOVE_USER':
@@ -10,11 +10,11 @@ switch(action){
     case'EDIT_USER':
     return state.map(user => {
         if(user.id == action.id){
-            // return Object.assign({}, user, action.user)
-            return {
-                ...user,
-                ...action.user
-            }
+            return Object.assign({}, user, action.user)
+            // return {
+            //     ...user,
+            //     ...action.user
+            // }
         }
     })
     default:
@@ -37,7 +37,7 @@ function addUser(params){
         }
     }
 }
-
+// action generator function
 function removeUser(id){
     return {
         type: 'REMOVE_USER',
@@ -53,6 +53,7 @@ function editUser(id, user){
     }
 }
 store.dispatch(addUser({id:1, name: 'ani',email: 'ani@gmail.com'}))
+// store.dispatch({type:"EDIT_USER", user: { id:1, name: 'ani',email: 'ani@gmail.com'}})
 store.dispatch(addUser({id:2, name: 'mani',email: 'mani@gmail.com'}))
 store.dispatch(addUser({id:3, name: 'ravi',email: 'ravi@gmail.com'}))
 
