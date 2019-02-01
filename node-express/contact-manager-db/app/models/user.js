@@ -96,7 +96,6 @@ userSchema.statics.findByToken = function(token) {
     let tokenData
     try {
         tokenData = jwt.verify(token, 'dct@welt533')
-
     }
     catch(err) {
         return Promise.reject(err)

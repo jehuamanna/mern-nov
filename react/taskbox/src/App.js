@@ -5,6 +5,10 @@ import { BrowserRouter,Route, Link} from 'react-router-dom'
 import ProjectList from './components/projects/list';
 
 
+import UserList from "./components/users/list"
+import UserAdd from './components/users/add'
+
+
 class App extends Component {
   render() {
     return (
@@ -14,11 +18,14 @@ class App extends Component {
           <ul>
             <li><Link to="/">Dashboard</Link></li>
             <li><Link to="/projects">Projects</Link></li>
+            <li><Link to="users">Users</Link></li>
           </ul>
 
 
-          <Route path="/" component={Dashboard} exact />
+          {/* <Route path="/" component={Dashboard} exact /> */}
           <Route path="/projects" component={ProjectList} />
+
+          <Route path="/users" component={UserList} />
         </div>
       </BrowserRouter>
     )
