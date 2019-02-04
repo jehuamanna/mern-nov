@@ -18,7 +18,7 @@ class App extends Component {
           <ul>
             <li><Link to="/">Dashboard</Link></li>
             <li><Link to="/projects">Projects</Link></li>
-            <li><Link to="users">Users</Link></li>
+            <li><Link to="/users">Users</Link></li>
           </ul>
 
 
@@ -26,6 +26,7 @@ class App extends Component {
           <Route path="/projects" component={ProjectList} />
 
           <Route path="/users" component={UserList} />
+          {/* <Route path="/users:id" component={}/> */}
         </div>
       </BrowserRouter>
     )
