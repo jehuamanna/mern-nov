@@ -1,0 +1,79 @@
+1. src (create folders inside src)
+    - components
+    - actions
+    - reducers
+    - store 
+
+2.
+    install redux - npm install --save redux 
+    
+    inside store folder  - create file  = configureStore.js 
+
+        import { createStore, combineReducers } from 'redux'
+
+        const configureStore = () => {
+            const store = createStore(combineReducers({
+
+            }))
+                return store 
+        }
+
+        export default configureStore
+
+3. in index.js - create a store 
+
+    import configureStore from './store/configureStore'
+    const store = configureStore()
+    store.subscribe(() => {
+        console.log(store.getState())
+    }) 
+
+4. under reducers - create projects.js 
+    const projectsInitialState = []
+    const projectsReducer = (state = projectsInitialState, action) => {
+        switch(action.type) {
+            case 'ADD_PROJECT' : 
+                return [...state, action.project]
+            case 'REMOVE_PROJECT' : 
+                return state.filter(project => project.id !== action.id )
+            default: 
+                return state 
+        }
+    }
+
+    export default projectsReducer
+
+5. under actions create projects.js 
+
+    // ADD_PROJECT
+    export const addProject = (project) => {
+        return {
+            type: 'ADD_PROJECT', 
+            project 
+        }
+    }
+
+    // EDIT_PROJECT
+
+    // REMOVE_PROJECT 
+    export const removeProject = (id) => {
+        return {
+            type: 'REMOVE_PROJECT', 
+            id
+        }
+    }
+
+6. make projects reducer available to your store 
+    in store/configureStore.js 
+
+    import projectsReducer from '../reducers/projects'
+
+
+    update the configure store function to look like this
+
+    const configureStore = () => {
+        const store = createStore(combineReducers({
+            projects: projectsReducer
+        }))
+        return store 
+    }

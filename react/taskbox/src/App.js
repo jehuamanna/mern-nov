@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter,Route, Link} from 'react-router-dom'
 import ProjectList from './components/projects/list';
-
-
+import ProjectAdd from './components/projects/add'
+import Dashboard from './components/dashboard/index'
 import UserList from "./components/users/list"
 import UserAdd from './components/users/add'
 
@@ -22,10 +22,11 @@ class App extends Component {
           </ul>
 
 
-          {/* <Route path="/" component={Dashboard} exact /> */}
-          <Route path="/projects" component={ProjectList} />
+          <Route path="/" component={Dashboard} exact />
+          <Route path="/projects" component={ProjectList} exact/>
 
-          <Route path="/users" component={UserList} />
+          <Route path="/users" component={UserList} exact/>
+          <Route path="/projects/new" component={ProjectAdd} />
           {/* <Route path="/users:id" component={}/> */}
         </div>
       </BrowserRouter>
